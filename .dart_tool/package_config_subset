@@ -1,7 +1,12 @@
 market_place
 2.12
+<<<<<<< HEAD
 file:///home/vmuser/Desktop/Mobile_Market_Place/
 file:///home/vmuser/Desktop/Mobile_Market_Place/lib/
+=======
+file:///home/vmuser/Desktop/SD/Mobile_Market_Place/
+file:///home/vmuser/Desktop/SD/Mobile_Market_Place/lib/
+>>>>>>> ae258aa2b78d27b3c4a6405796d724963b5d9475
 async
 2.12
 file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.6.1/

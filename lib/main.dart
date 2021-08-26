@@ -19,9 +19,21 @@ class _MainState extends State<Main> {
 
   int _currentIndex = 0;
 
+<<<<<<< HEAD
 
   final List<Widget> _children = [
   HomePage(),Login(),Registration(),UserPage()
+=======
+  final tabs = [
+    Center(child: Text("HomePage"),),
+    Center(child: Text("Login"),),
+    Center(child: Text("Registration"),),
+    Center(child: Text("userPage"),),
+  ];
+
+  final List<Widget> _children = [
+    Registration(),Login(),HomePage(),UserPage()
+>>>>>>> ae258aa2b78d27b3c4a6405796d724963b5d9475
 
   ];
 
