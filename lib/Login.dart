@@ -15,9 +15,9 @@ class Login extends StatelessWidget {
               Flexible(
                 child: Center(
                   child: Text(
-                    'Foodybite',
+                    'Marketplace',
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.blue[900],
                         fontSize: 60,
                         fontWeight: FontWeight.bold),
                   ),
@@ -38,10 +38,11 @@ class Login extends StatelessWidget {
                     inputAction: TextInputAction.done,
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, 'ForgotPassword'),
+                    onTap: () => Navigator.pushNamed(context, '/'),
                     child: Text(
                       'Forgot Password',
-                      style: kBodyText,
+                      style: kBodyText.copyWith(
+                          color: kBlue, fontWeight: FontWeight.bold),
                     ),
                   ),
                   SizedBox(
@@ -56,11 +57,12 @@ class Login extends StatelessWidget {
                 ],
               ),
               GestureDetector(
-                onTap: () => Navigator.pushNamed(context, 'CreateNewAccount'),
+                onTap: () => Navigator.pushNamed(context, '/'),
                 child: Container(
                   child: Text(
                     'Create New Account',
-                    style: kBodyText,
+                    style: kBodyText.copyWith(
+                        color: kBlue, fontWeight: FontWeight.bold),
                   ),
                   decoration: BoxDecoration(
                       border:
