@@ -16,13 +16,13 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
-
   int _currentIndex = 0;
 
-
   final List<Widget> _children = [
-    HomePage(),Login(),Registration(),UserPage()
-
+    HomePage(),
+    Login(),
+    Registration(),
+    UserPage()
   ];
 
   @override
@@ -58,7 +58,7 @@ class _MainState extends State<Main> {
             backgroundColor: Colors.pink,
           ),
         ],
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
