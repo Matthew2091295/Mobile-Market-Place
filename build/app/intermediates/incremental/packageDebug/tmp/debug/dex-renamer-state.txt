@@ -1,4 +1,4 @@
-#Sat Aug 28 11:07:00 UTC 2021
+#Sat Aug 28 12:51:58 UTC 2021
 base.0=/home/vmuser/Desktop/MarketPlace/Mobile_Market_Place/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

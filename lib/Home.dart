@@ -15,7 +15,7 @@ class Home extends StatelessWidget {
         children: <Widget>[
           Center(
             child: Container(
-              width: 380.0,
+              width: MediaQuery.of(context).size.width * 0.90,
               margin: EdgeInsets.only(top: 20.0),
               child: TextField(
                 decoration: InputDecoration(
