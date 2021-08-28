@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:market_place/HomePage.dart';
 import 'package:market_place/pallete.dart';
 import 'package:market_place/widgets/widgets.dart';
 
@@ -24,13 +25,16 @@ class Login extends StatelessWidget {
                 ),
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                //crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   TextInputField(
                     icon: FontAwesomeIcons.envelope,
                     hint: 'Email',
                     inputType: TextInputType.emailAddress,
                     inputAction: TextInputAction.next,
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   PasswordInput(
                     icon: FontAwesomeIcons.lock,
@@ -52,6 +56,9 @@ class Login extends StatelessWidget {
                     buttonName: 'Login',
                   ),
                   SizedBox(
+                    height: 15,
+                  ),
+                  SizedBox(
                     height: 25,
                   ),
                 ],
@@ -71,6 +78,24 @@ class Login extends StatelessWidget {
               ),
               SizedBox(
                 height: 20,
+              ),
+              Center(
+                child: SizedBox(
+                  width: 300,
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => HomePage()));
+                    },
+                    color: Color.fromRGBO(206, 166, 97, 1.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                    child: Text("Login"),
+                  ),
+                ),
               ),
             ],
           ),

@@ -38,6 +38,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "crypto",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.3",
       "packageUri": "lib/",
@@ -50,8 +56,26 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "ffi",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-1.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "file",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/packages/flutter",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_staggered_grid_view",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -60,6 +84,30 @@
       "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "font_awesome_flutter",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.12.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "google_fonts",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-1.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
     },
     {
       "name": "matcher",
@@ -76,6 +124,60 @@
     {
       "name": "path",
       "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_linux",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_macos",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_windows",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "pedantic",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "platform",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/platform-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "process",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -134,13 +236,25 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "win32",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.2.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.13"
+    },
+    {
+      "name": "xdg_directories",
+      "rootUri": "file:///home/vmuser/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "market_place",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-26T14:14:09.818411Z",
+  "generated": "2021-08-28T11:23:08.730306Z",
   "generator": "pub",
   "generatorVersion": "2.13.1"
 }
