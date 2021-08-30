@@ -3,8 +3,8 @@ import 'package:market_place/pallete.dart';
 
 class RoundedButton extends StatelessWidget {
   const RoundedButton({
-    Key? key,
-    required this.buttonName,
+    Key key,
+    @required this.buttonName,
   }) : super(key: key);
 
   final String buttonName;

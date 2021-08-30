@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_place/Login.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key? key}) : super(key: key);
+  const MainDrawer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +71,11 @@ class MainDrawer extends StatelessWidget {
               "Logout",
               style: TextStyle(fontSize: 18.0),
             ),
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Login()));
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => Login()));
             },
           ),
         ],
