@@ -14,7 +14,7 @@ class Registration extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(40.0),
           child: Scaffold(
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
             body: SingleChildScrollView(
               child: Column(
                 children: [

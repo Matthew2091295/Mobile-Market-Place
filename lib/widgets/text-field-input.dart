@@ -3,17 +3,17 @@ import 'package:market_place/pallete.dart';
 
 class TextInputField extends StatelessWidget {
   const TextInputField({
-    Key? key,
-    required this.icon,
-    required this.hint,
+    Key key,
+    @required this.icon,
+    @required this.hint,
     this.inputType,
     this.inputAction,
   }) : super(key: key);
 
   final IconData icon;
   final String hint;
-  final TextInputType? inputType;
-  final TextInputAction? inputAction;
+  final TextInputType inputType;
+  final TextInputAction inputAction;
 
   @override
   Widget build(BuildContext context) {
