@@ -1,11 +1,18 @@
-  
-language: node_js
-node_js:
- - "node"
-before_install:
-  - pip install --user codecov
-after_success:
-  - codecov --file coverage/lcov.info --disable search
-codecov:
-  token: 032f59ee-4fcd-47e6-8b22-47930fe3e7f2
-  
+os:
+  - linux
+sudo: false
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test 
+    packages:
+      - libstdc++6
+      - fonts-droid-fallback
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b beta
+  - ./flutter/bin/flutter doctor
+script:
+  - ./flutter/bin/flutter test
+cache:
+  directories:
+    - $HOME/.pub-cache
