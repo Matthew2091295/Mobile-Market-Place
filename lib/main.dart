@@ -1,10 +1,5 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:market_place/HomePage.dart';
 import 'package:market_place/Login.dart';
-import 'package:market_place/Registration.dart';
-import 'package:market_place/UserPage.dart';
 
 void main() {
   runApp(MaterialApp(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:market_place/Drawer.dart';
-import 'package:market_place/Staggered.dart';
 
 class Home extends StatelessWidget {
 

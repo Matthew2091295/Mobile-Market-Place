@@ -6,10 +6,6 @@ import 'package:market_place/Home.dart';
 import 'package:market_place/Lists.dart';
 import 'package:market_place/More.dart';
 
-import 'Login.dart';
-import 'Registration.dart';
-import 'UserPage.dart';
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
