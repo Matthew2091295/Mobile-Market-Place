@@ -21,6 +21,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  //Declaring global TextEditingControllers. They are used to fetch the text from a textfield.
+  TextEditingController username = new TextEditingController();
+  TextEditingController password = new TextEditingController();
+
   getMethod() async {
     String theUrl = "https://lamp.ms.wits.ac.za/home/s1854457/getData.php";
     var res = await http
@@ -30,6 +34,16 @@ class _LoginState extends State<Login> {
     print(responseBody);
 
     return responseBody;
+  }
+
+  checkDetails(List snap, String username, String password) {
+    //Loops thorugh snap (JSON String) and checks if the details are correct
+    for (int i = 0; i < snap.length; i++) {
+      if (snap[i]['username'] == username && snap[i]['password'] == password) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @override
@@ -65,9 +79,11 @@ class _LoginState extends State<Login> {
                         children: [
                           TextInputField(
                             icon: FontAwesomeIcons.envelope,
-                            hint: Text("username: ${snap[0]['username']}").data,
+                            hint: "Username",
                             inputType: TextInputType.emailAddress,
                             inputAction: TextInputAction.next,
+                            //Adding the controller to the Login TextInputField. TextInputField is defined in text-input-field.dart
+                            controller: username,
                           ),
                           SizedBox(
                             height: 10,
@@ -76,6 +92,8 @@ class _LoginState extends State<Login> {
                             icon: FontAwesomeIcons.lock,
                             hint: 'Password',
                             inputAction: TextInputAction.done,
+                            //Adding the controller to the Password PasswordInput. PasswordInput is defined in password-input.dart
+                            controller: password,
                           ),
                           GestureDetector(
                             onTap: () => Navigator.push(
@@ -92,8 +110,56 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 25,
                           ),
-                          RoundedButton(
-                            buttonName: 'Login',
+                          Center(
+                            child: SizedBox(
+                              width: 300,
+                              height: 50,
+                              child: RaisedButton(
+                                onPressed: () {
+                                  //Cfetching and checking login details
+                                  if (checkDetails(
+                                      snap, username.text, password.text)) {
+                                    username.text = "";
+                                    password.text = "";
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                HomePage()));
+                                  } else {
+                                    username.text = "";
+                                    password.text = "";
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: new Text(
+                                              "Incorrect Username or Password"),
+                                          content: new Text(
+                                              "Username or Password is incorrect"),
+                                          actions: <Widget>[
+                                            new FlatButton(
+                                              child: new Text("OK"),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+                                },
+                                color: Color(0xff5663ff),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Text(
+                                  "Login",
+                                  style: kBodyText.copyWith(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 15,
@@ -118,24 +184,6 @@ class _LoginState extends State<Login> {
                       ),
                       SizedBox(
                         height: 20,
-                      ),
-                      Center(
-                        child: SizedBox(
-                          width: 300,
-                          child: RaisedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          HomePage()));
-                            },
-                            color: Color.fromRGBO(206, 166, 97, 1.0),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Text("Login"),
-                          ),
-                        ),
                       ),
                     ],
                   );
