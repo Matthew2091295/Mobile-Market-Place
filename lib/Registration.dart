@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:market_place/pallete.dart';
 import 'package:market_place/widgets/widgets.dart';
-import 'package:flutter/material.dart';
 
 class Registration extends StatelessWidget {
   @override

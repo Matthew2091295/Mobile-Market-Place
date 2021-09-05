@@ -10,9 +10,8 @@ import 'dart:convert';
 /*
 Adding Database integration to the application:
 
-Currently the database is accessed via getMethod(), which shou,d probably be put into its own .dart file, so that we are not reusing code. Currently pulls the first record in the database,
+Currently the database is accessed via getMethod(), which should probably be put into its own .dart file, so that we are not reusing code. Currently pulls the first record in the database,
 and sets the hint for the login as the first records username.
-
 */
 
 class Login extends StatefulWidget {
@@ -26,7 +25,8 @@ class _LoginState extends State<Login> {
   TextEditingController password = new TextEditingController();
 
   getMethod() async {
-    String theUrl = "https://lamp.ms.wits.ac.za/home/s1854457/getData.php";
+    String theUrl =
+        "https://lamp.ms.wits.ac.za/home/s1854457/getData.php"; //connecting to Wits database
     var res = await http
         .get(Uri.encodeFull(theUrl), headers: {"Accept": "application/json"});
     var responseBody = json.decode(res.body);
@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
         Scaffold(
             backgroundColor: Colors.white,
             body: FutureBuilder(
-                future: getMethod(),
+                future: getMethod(), //retrieving data from database
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   List snap = snapshot.data;
                   if (snapshot.hasError) {
@@ -79,7 +79,7 @@ class _LoginState extends State<Login> {
                         children: [
                           TextInputField(
                             icon: FontAwesomeIcons.envelope,
-                            hint: "Username",
+                            hint: "Username"
                             inputType: TextInputType.emailAddress,
                             inputAction: TextInputAction.next,
                             //Adding the controller to the Login TextInputField. TextInputField is defined in text-input-field.dart
