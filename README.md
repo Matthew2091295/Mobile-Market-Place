@@ -1,5 +1,4 @@
 [![Build Status](https://app.travis-ci.com/2109688/Mobile_Market_Place.svg?branch=main)](https://app.travis-ci.com/2109688/Mobile_Market_Place)
-[![codecov](https://codecov.io/gh/2153068/Market-Place/branch/master/graph/badge.svg?token=3LBVNPDVBX)](https://codecov.io/gh/2153068/Market-Place)
 
 # Market place
 _Group 2 software design project_
