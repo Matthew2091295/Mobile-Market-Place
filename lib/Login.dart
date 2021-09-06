@@ -6,6 +6,7 @@ import 'package:market_place/widgets/widgets.dart';
 import 'package:market_place/Registration.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_test/flutter_test.dart';
 
 /*
 Adding Database integration to the application:
@@ -79,7 +80,7 @@ class _LoginState extends State<Login> {
                         children: [
                           TextInputField(
                             icon: FontAwesomeIcons.envelope,
-                            hint: "Username"
+                            hint: "Username",
                             inputType: TextInputType.emailAddress,
                             inputAction: TextInputAction.next,
                             //Adding the controller to the Login TextInputField. TextInputField is defined in text-input-field.dart
@@ -95,18 +96,18 @@ class _LoginState extends State<Login> {
                             //Adding the controller to the Password PasswordInput. PasswordInput is defined in password-input.dart
                             controller: password,
                           ),
-                          GestureDetector(
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Registration())),
-                            child: Text(
-                              'Forgot Password',
-                              style: kBodyText.copyWith(
-                                  color: kBlue, fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          // GestureDetector(
+                          //   onTap: () => Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (BuildContext context) =>
+                          //               Registration())),
+                          //   child: Text(
+                          //     'Forgot Password',
+                          //     style: kBodyText.copyWith(
+                          //         color: kBlue, fontWeight: FontWeight.bold),
+                          //   ),
+                          // ),
                           SizedBox(
                             height: 25,
                           ),
@@ -170,7 +171,11 @@ class _LoginState extends State<Login> {
                         ],
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, '/'),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    Registration())),
                         child: Container(
                           child: Text(
                             'Create New Account',
