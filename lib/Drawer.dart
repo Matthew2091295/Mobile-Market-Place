@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:market_place/Login.dart';
-import 'package:market_place/UserPage.dart';
-
-import 'Globals.dart' as Globals;
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String userNames = '';
-    if ((Globals.firstName != null) && (Globals.lastName != null)) {
-      userNames = Globals.firstName + " " + Globals.lastName;
-    }
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -37,7 +30,7 @@ class MainDrawer extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    userNames,
+                    "Username",
                     style: TextStyle(
                       fontSize: 22,
                       color: Colors.black,
@@ -47,7 +40,7 @@ class MainDrawer extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    Globals.username,
+                    "username@gmail.com",
                     style: TextStyle(
                       color: Colors.black,
                     ),
@@ -62,12 +55,7 @@ class MainDrawer extends StatelessWidget {
               "Profile",
               style: TextStyle(fontSize: 18.0),
             ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UserPage()),
-              );
-            },
+            onTap: null,
           ),
           ListTile(
             leading: Icon(Icons.settings),
