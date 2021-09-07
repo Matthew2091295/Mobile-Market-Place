@@ -14,18 +14,15 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  TextEditingController username = new TextEditingController();
-  TextEditingController password = new TextEditingController();
-  TextEditingController email = new TextEditingController();
-  TextEditingController passwordconfirm = new TextEditingController();
   TextEditingController fname = new TextEditingController();
   TextEditingController lname = new TextEditingController();
+  TextEditingController email = new TextEditingController();
+  TextEditingController password = new TextEditingController();
+  TextEditingController passwordconfirm = new TextEditingController();
 
   // ignore: non_constant_identifier_names
   Future<void> getMethod(String username, String first_name, String last_name,
       String password) async {
-    print("-------------------------");
-    print(username);
     String theUrl =
         "https://lamp.ms.wits.ac.za/home/s1854457/register_user.php";
 
@@ -38,29 +35,7 @@ class _RegistrationState extends State<Registration> {
 
     var response = await http.post(theUrl, body: json.encode(data));
     print(response.body);
-    // final url = Uri.parse(theUrl);
-    // final headers = {"Content-type": "application/json"};
-    // final json = {
-    //   "username": username,
-    //   "first_name": first_name,
-    //   "last_name": last_name,
-    //   "password": password
-    // };
-    // final t = jsonEncode(json);
-    // var res = await http
-    //     .post(Uri.encodeFull(theUrl), headers: {"Accept": "application/json"});
-    // var responseBody = json.decode(res.body);
-
-    // print(responseBody);
-
-    // return responseBody;
-    // final response = await http.post(url, headers: headers, body: t);
-    // print('Status code: ${response.statusCode}');
-    // print('Body: ${response.body}');
   }
-
-  //First Name
-  //Password
 
   @override
   Widget build(BuildContext context) {
@@ -87,14 +62,14 @@ class _RegistrationState extends State<Registration> {
                         hint: 'First Name',
                         inputType: TextInputType.name,
                         inputAction: TextInputAction.next,
-                        controller: username,
+                        controller: fname,
                       ),
                       TextInputField(
                         icon: FontAwesomeIcons.user,
                         hint: 'Last Name',
                         inputType: TextInputType.name,
                         inputAction: TextInputAction.next,
-                        controller: username,
+                        controller: lname,
                       ),
                       TextInputField(
                         icon: FontAwesomeIcons.envelope,
@@ -124,32 +99,16 @@ class _RegistrationState extends State<Registration> {
                           height: 50,
                           child: RaisedButton(
                             onPressed: () {
-                              if (username.text != "" &&
-                                  password.text != "" &&
-                                  passwordconfirm.text != "" &&
-                                  email.text != "" &&
-                                  fname.text != "" &&
-                                  lname.text != "" &&
-                                  password.text == passwordconfirm.text) {
-                                getMethod(username.text, fname.text, lname.text,
-                                    password.text);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            HomePage()));
-                                username.text = "";
-                                email.text = "";
+                              if (password.text != passwordconfirm.text) {
                                 password.text = "";
                                 passwordconfirm.text = "";
-                              } else {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
                                       title: new Text("Incorrect Details"),
-                                      content: new Text(
-                                          "Details are incorrect, please try again"),
+                                      content:
+                                          new Text("Passwords do not match"),
                                       actions: <Widget>[
                                         new FlatButton(
                                           child: new Text("OK"),
@@ -161,6 +120,75 @@ class _RegistrationState extends State<Registration> {
                                     );
                                   },
                                 );
+                              } else if (email.text == "") {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: new Text("Missing Details"),
+                                      content: new Text("Email Missing"),
+                                      actions: <Widget>[
+                                        new FlatButton(
+                                          child: new Text("OK"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else if (fname.text == "" || lname.text == "") {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: new Text("Incorrect Details"),
+                                      content: new Text(
+                                          "First or Last name missing"),
+                                      actions: <Widget>[
+                                        new FlatButton(
+                                          child: new Text("OK"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else if (password.text == "" ||
+                                  passwordconfirm.text == "") {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: new Text("Incorrect Details"),
+                                      content: new Text("Passwords missing"),
+                                      actions: <Widget>[
+                                        new FlatButton(
+                                          child: new Text("OK"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                getMethod(email.text, fname.text, lname.text,
+                                    password.text);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomePage()));
+                                email.text = "";
+                                fname.text = "";
+                                lname.text = "";
+                                password.text = "";
+                                passwordconfirm.text = "";
                               }
                             },
                             color: Color(0xff5663ff),
