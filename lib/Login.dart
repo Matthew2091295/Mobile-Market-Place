@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'Globals.dart' as Globals;
+
 /*
 Adding Database integration to the application:
 
@@ -45,6 +47,16 @@ class _LoginState extends State<Login> {
       }
     }
     return false;
+  }
+
+  updateUserGlobals(List snap, String username) {
+    int index = 0;
+    while (snap[index]['username'] != username) {
+      index++;
+    }
+    Globals.firstName = snap[index]['first_name'];
+    Globals.lastName = snap[index]['last_name'];
+    Globals.birthDate = snap[index]['date_of_birth'];
   }
 
   @override
