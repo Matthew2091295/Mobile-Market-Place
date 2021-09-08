@@ -49,151 +49,155 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-            backgroundColor: Colors.white,
-            body: FutureBuilder(
-                future: getMethod(), //retrieving data from database
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  List snap = snapshot.data;
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text("Error fetching Data"),
-                    );
-                  }
-                  return Column(
-                    children: [
-                      Flexible(
-                        child: Center(
-                          child: Text(
-                            'Marketplace',
-                            style: TextStyle(
-                                color: Colors.blue[900],
-                                fontSize: 60,
-                                fontWeight: FontWeight.bold),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Stack(
+        children: [
+          Scaffold(
+              backgroundColor: Colors.white,
+              body: FutureBuilder(
+                  future: getMethod(), //retrieving data from database
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    List snap = snapshot.data;
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text("Error fetching Data"),
+                      );
+                    }
+                    return Column(
+                      children: [
+                        Flexible(
+                          child: Center(
+                            child: Text(
+                              'Marketplace',
+                              style: TextStyle(
+                                  color: Colors.blue[900],
+                                  fontSize: 60,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
-                      ),
-                      Column(
-                        //crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          TextInputField(
-                            icon: FontAwesomeIcons.envelope,
-                            hint: "Username",
-                            inputType: TextInputType.emailAddress,
-                            inputAction: TextInputAction.next,
-                            //Adding the controller to the Login TextInputField. TextInputField is defined in text-input-field.dart
-                            controller: username,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          PasswordInput(
-                            icon: FontAwesomeIcons.lock,
-                            hint: 'Password',
-                            inputAction: TextInputAction.done,
-                            //Adding the controller to the Password PasswordInput. PasswordInput is defined in password-input.dart
-                            controller: password,
-                          ),
-                          // GestureDetector(
-                          //   onTap: () => Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //           builder: (BuildContext context) =>
-                          //               Registration())),
-                          //   child: Text(
-                          //     'Forgot Password',
-                          //     style: kBodyText.copyWith(
-                          //         color: kBlue, fontWeight: FontWeight.bold),
-                          //   ),
-                          // ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Center(
-                            child: SizedBox(
-                              width: 300,
-                              height: 50,
-                              child: RaisedButton(
-                                onPressed: () {
-                                  //Cfetching and checking login details
-                                  if (checkDetails(
-                                      snap, username.text, password.text)) {
-                                    username.text = "";
-                                    password.text = "";
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                HomePage()));
-                                  } else {
-                                    username.text = "";
-                                    password.text = "";
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: new Text(
-                                              "Incorrect Username or Password"),
-                                          content: new Text(
-                                              "Username or Password is incorrect"),
-                                          actions: <Widget>[
-                                            new FlatButton(
-                                              child: new Text("OK"),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  }
-                                },
-                                color: Color(0xff5663ff),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Text(
-                                  "Login",
-                                  style: kBodyText.copyWith(
-                                      fontWeight: FontWeight.bold),
+                        Column(
+                          //crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            TextInputField(
+                              icon: FontAwesomeIcons.envelope,
+                              hint: "Username",
+                              inputType: TextInputType.emailAddress,
+                              inputAction: TextInputAction.next,
+                              //Adding the controller to the Login TextInputField. TextInputField is defined in text-input-field.dart
+                              controller: username,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            PasswordInput(
+                              icon: FontAwesomeIcons.lock,
+                              hint: 'Password',
+                              inputAction: TextInputAction.done,
+                              //Adding the controller to the Password PasswordInput. PasswordInput is defined in password-input.dart
+                              controller: password,
+                            ),
+                            // GestureDetector(
+                            //   onTap: () => Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //           builder: (BuildContext context) =>
+                            //               Registration())),
+                            //   child: Text(
+                            //     'Forgot Password',
+                            //     style: kBodyText.copyWith(
+                            //         color: kBlue, fontWeight: FontWeight.bold),
+                            //   ),
+                            // ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Center(
+                              child: SizedBox(
+                                width: 300,
+                                height: 50,
+                                child: RaisedButton(
+                                  onPressed: () {
+                                    //fetching and checking login details
+                                    if (checkDetails(
+                                        snap, username.text, password.text)) {
+                                      username.text = "";
+                                      password.text = "";
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  HomePage()));
+                                    } else {
+                                      username.text = "";
+                                      password.text = "";
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: new Text(
+                                                "Incorrect Username or Password"),
+                                            content: new Text(
+                                                "Username or Password is incorrect"),
+                                            actions: <Widget>[
+                                              new FlatButton(
+                                                child: new Text("OK"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  color: Color(0xff5663ff),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Text(
+                                    "Login",
+                                    style: kBodyText.copyWith(
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                        ],
-                      ),
-                      GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    Registration())),
-                        child: Container(
-                          child: Text(
-                            'Create New Account',
-                            style: kBodyText.copyWith(
-                                color: kBlue, fontWeight: FontWeight.bold),
-                          ),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(width: 1, color: kWhite))),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  );
-                }))
-      ],
+                        GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      Registration())),
+                          child: Container(
+                            child: Text(
+                              'Create New Account',
+                              style: kBodyText.copyWith(
+                                  color: kBlue, fontWeight: FontWeight.bold),
+                            ),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom:
+                                        BorderSide(width: 1, color: kWhite))),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    );
+                  }))
+        ],
+      ),
     );
   }
 }
