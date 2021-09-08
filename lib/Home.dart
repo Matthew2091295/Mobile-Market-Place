@@ -4,7 +4,7 @@ import 'package:market_place/Drawer.dart';
 class Home extends StatelessWidget {
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(206, 166, 97, 1.0),

@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
     return responseBody;
   }
 
-  checkDetails(List snap, String username, String password) {
+  checkDetails(List snap, String username, String password){
     //Loops thorugh snap (JSON String) and checks if the details are correct
     for (int i = 0; i < snap.length; i++) {
       if (snap[i]['username'] == username && snap[i]['password'] == password) {
@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
     return false;
   }
 
-  updateUserGlobals(List snap, String username) {
+  updateUserGlobals(List snap, String username){
     int index = 0;
     while (snap[index]['username'] != username) {
       index++;
