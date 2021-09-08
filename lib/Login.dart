@@ -17,7 +17,7 @@ Currently the database is accessed via getMethod(), which should probably be put
 and sets the hint for the login as the first records username.
 */
 
-class Login extends StatefulWidget {
+class Login extends StatefulWidget{
   @override
   _LoginState createState() => _LoginState();
 }
@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
   TextEditingController username = new TextEditingController();
   TextEditingController password = new TextEditingController();
 
-  getMethod() async {
+  getMethod() async{
     String theUrl =
         "https://lamp.ms.wits.ac.za/home/s1854457/getData.php"; //connecting to Wits database
     var res = await http
