@@ -7,7 +7,6 @@ import 'package:market_place/Registration.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'Globals.dart' as Globals;
 
 /*
