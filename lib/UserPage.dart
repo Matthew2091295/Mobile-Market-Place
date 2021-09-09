@@ -40,7 +40,7 @@ class _UserPageState extends State<UserPage> {
       ),
       child: ListView(
         children: [
-          Personal(contextHeight,profilePictureRatio),
+          Personal(contextHeight, profilePictureRatio),
         ],
       ),
     );
@@ -68,46 +68,58 @@ class ProfilePicture extends StatelessWidget {
   }
 }
 
-class Personal extends StatelessWidget{
-  Personal(this.contextHeight,this.profilePictureRatio);
+class Personal extends StatelessWidget {
+  Personal(this.contextHeight, this.profilePictureRatio);
   final double contextHeight;
   final double profilePictureRatio;
 
   Widget build(BuildContext context) {
     final innerHeight = contextHeight * 0.325;
 
-    String userName = Globals.firstName + " " + Globals.lastName;
+    String fullNames = "";
+    String username = "";
+    String birthDate = "";
+
+    if ((Globals.firstName != null) && (Globals.lastName != null)) {
+      fullNames = Globals.firstName + " " + Globals.lastName;
+    }
+
+    if (Globals.username != null) {
+      username = Globals.username;
+    }
+
+    if (Globals.birthDate != null) {
+      birthDate = Globals.birthDate;
+    }
 
     return Container(
       height: innerHeight,
       width: double.infinity,
       child: Stack(
         children: [
-
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
-            top: (profilePictureRatio)/2,
+            top: (profilePictureRatio) / 2,
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(25)),
               ),
-
               child: Stack(
                 children: [
                   Positioned(
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    top: (profilePictureRatio/2) + padding,
+                    top: (profilePictureRatio / 2) + padding,
                     child: Column(
                       children: [
                         // USER FULL NAMES
                         RichText(
                           text: TextSpan(
-                            text: userName,
+                            text: fullNames,
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -119,7 +131,7 @@ class Personal extends StatelessWidget{
                         // USER EMAIL ADDRESS
                         RichText(
                           text: TextSpan(
-                            text: Globals.username,
+                            text: username,
                             style: TextStyle(
                               fontSize: 20,
                               color: darkGrey,
@@ -130,7 +142,7 @@ class Personal extends StatelessWidget{
                         // USER BIRTH DATE
                         RichText(
                           text: TextSpan(
-                            text: Globals.birthDate,
+                            text: birthDate,
                             style: TextStyle(
                               fontSize: 20,
                               color: darkGrey,
@@ -144,7 +156,6 @@ class Personal extends StatelessWidget{
               ),
             ),
           ),
-
           Positioned(
             left: 0,
             right: 0,
