@@ -76,9 +76,9 @@ class Personal extends StatelessWidget {
   Widget build(BuildContext context) {
     final innerHeight = contextHeight * 0.325;
 
-    String fullNames = "Name Surname";
-    String username = "Username";
-    String birthDate = "Date of Birth";
+    String fullNames = "";
+    String username = "";
+    String birthDate = "";
 
     if ((Globals.firstName != null) && (Globals.lastName != null)) {
       fullNames = Globals.firstName + " " + Globals.lastName;
