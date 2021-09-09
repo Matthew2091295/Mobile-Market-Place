@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:market_place/HomePage.dart';
 
+import 'Globals.dart' as Globals;
+
 class Registration extends StatefulWidget {
   @override
   _RegistrationState createState() => _RegistrationState();
@@ -179,6 +181,9 @@ class _RegistrationState extends State<Registration> {
                               } else {
                                 getMethod(email.text, fname.text, lname.text,
                                     password.text);
+                                Globals.firstName = fname.text;
+                                Globals.lastName = lname.text;
+                                Globals.username = email.text;
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
