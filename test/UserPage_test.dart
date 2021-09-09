@@ -23,7 +23,17 @@ void main() {
 
     expect(
         find.byWidgetPredicate(
-            (widget) => fromRichTextToPlainText(widget) == ""),
-        findsWidgets);
+            (widget) => fromRichTextToPlainText(widget) == "Name Surname"),
+        findsOneWidget);
+
+    expect(
+        find.byWidgetPredicate(
+            (widget) => fromRichTextToPlainText(widget) == "Username"),
+        findsOneWidget);
+
+    expect(
+        find.byWidgetPredicate(
+            (widget) => fromRichTextToPlainText(widget) == "Date of Birth"),
+        findsOneWidget);
   });
 }
