@@ -20,20 +20,10 @@ void main() {
         child: new MaterialApp(home: new UserPage()));
 
     await tester.pumpWidget(testWidget);
-
+    
     expect(
         find.byWidgetPredicate(
-            (widget) => fromRichTextToPlainText(widget) == "Name Surname"),
-        findsOneWidget);
-
-    expect(
-        find.byWidgetPredicate(
-            (widget) => fromRichTextToPlainText(widget) == "Username"),
-        findsOneWidget);
-
-    expect(
-        find.byWidgetPredicate(
-            (widget) => fromRichTextToPlainText(widget) == "Date of Birth"),
-        findsOneWidget);
+            (widget) => fromRichTextToPlainText(widget) == ""),
+        findsWidgets);
   });
 }
