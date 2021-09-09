@@ -133,6 +133,8 @@ class _LoginState extends State<Login> {
                                     //fetching and checking login details
                                     if (checkDetails(
                                         snap, username.text, password.text)) {
+                                      Globals.username = username.text;
+                                      updateUserGlobals(snap, username.text);
                                       username.text = "";
                                       password.text = "";
                                       Navigator.push(
