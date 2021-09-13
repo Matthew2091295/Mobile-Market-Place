@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Yaakov\\Desktop\\Wits\\SDP\\Mobile_Market_Place-3\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "C:\\Users\\shlom\\OneDrive\\Documents\\Wits\\3rd year\\SDP\\Mobile_Market_Place\\Mobile_Market_Place\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaakov\\Desktop\\Wits\\SDP\\Mobile_Market_Place-3\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Users\\shlom\\OneDrive\\Documents\\Wits\\3rd year\\SDP\\Mobile_Market_Place\\Mobile_Market_Place\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
