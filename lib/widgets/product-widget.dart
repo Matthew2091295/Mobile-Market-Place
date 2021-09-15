@@ -29,14 +29,17 @@ class Product extends StatelessWidget {
             child: Column(
               children: [
                 Image(
-                  image: NetworkImage(
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.scaleDown,
-                ),
+                    image: NetworkImage(
+                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.scaleDown,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace stackTrace) {
+                      return Text('Error fetching Image');
+                    }),
                 Text(this.name),
-                Text("R" + this.price.toString()),
+                Text("R" + this.price.toStringAsFixed(2)),
                 Text("Quantity: " + this.quantity.toString()),
                 ElevatedButton(onPressed: () {}, child: Text("More"))
               ],
