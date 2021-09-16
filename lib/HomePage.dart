@@ -5,6 +5,7 @@ import 'package:market_place/Drawer.dart';
 import 'package:market_place/Home.dart';
 import 'package:market_place/Lists.dart';
 import 'package:market_place/More.dart';
+import 'package:market_place/Cart.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
-  final List<Widget> _children = [Home(), Categories(), Lists(), More()];
+  final List<Widget> _children = [Home(), Categories(), Lists(), Cart()];
 
 
   @override
@@ -49,8 +50,8 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Colors.yellow,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              title: Text("Lists"),
+              icon: Icon(Icons.shopping_cart),
+              title: Text("Cart"),
               backgroundColor: Colors.pink,
             ),
           ],
