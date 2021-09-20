@@ -9,10 +9,12 @@ void main() {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
         child: new MaterialApp(
-            home: new PasswordInput(
-                icon: FontAwesomeIcons.lock,
-                hint: "password",
-                inputAction: TextInputAction.done)));
+            home: Scaffold(
+          body: new PasswordInput(
+              icon: FontAwesomeIcons.lock,
+              hint: "password",
+              inputAction: TextInputAction.done),
+        )));
     await tester.pumpWidget(testWidget);
     expect(find.widgetWithIcon(PasswordInput, FontAwesomeIcons.lock),
         findsOneWidget);
