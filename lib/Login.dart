@@ -16,7 +16,7 @@ Currently the database is accessed via getMethod(), which should probably be put
 and sets the hint for the login as the first records username.
 */
 
-class Login extends StatefulWidget{
+class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
   TextEditingController username = new TextEditingController();
   TextEditingController password = new TextEditingController();
 
-  getMethod() async{
+  getMethod() async {
     String theUrl =
         "https://lamp.ms.wits.ac.za/home/s1854457/getData.php"; //connecting to Wits database
     var res = await http
@@ -38,7 +38,7 @@ class _LoginState extends State<Login> {
     return responseBody;
   }
 
-  checkDetails(List snap, String username, String password){
+  checkDetails(List snap, String username, String password) {
     //Loops thorugh snap (JSON String) and checks if the details are correct
     for (int i = 0; i < snap.length; i++) {
       if (snap[i]['username'] == username && snap[i]['password'] == password) {
@@ -48,7 +48,7 @@ class _LoginState extends State<Login> {
     return false;
   }
 
-  updateUserGlobals(List snap, String username){
+  updateUserGlobals(List snap, String username) {
     int index = 0;
     while (snap[index]['username'] != username) {
       index++;
@@ -82,7 +82,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               'Marketplace',
                               style: TextStyle(
-                                  color: Colors.blue[900],
+                                  color: Color.fromRGBO(142, 120, 54, 1.0),
                                   fontSize: 60,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -166,7 +166,7 @@ class _LoginState extends State<Login> {
                                       );
                                     }
                                   },
-                                  color: Color(0xff5663ff),
+                                  color: Color.fromRGBO(142, 120, 54, 1.0),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15)),
                                   child: Text(
@@ -193,14 +193,13 @@ class _LoginState extends State<Login> {
                                       Registration())),
                           child: Container(
                             child: Text(
-                              'Create New Account',
-                              style: kBodyText.copyWith(
-                                  color: kBlue, fontWeight: FontWeight.bold),
+                              "Create New Account",
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(142, 120, 54, 1.0),
+                              ),
                             ),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom:
-                                        BorderSide(width: 1, color: kWhite))),
                           ),
                         ),
                         SizedBox(
