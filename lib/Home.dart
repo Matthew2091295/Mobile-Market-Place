@@ -51,8 +51,12 @@ class _HomeState extends State<Home> {
     var products = categories[cat];
     final arr = <Widget>[];
     for (var p in products) {
-      arr.add(
-          Product(name: p.item1, price: p.item2, description: "", quantity: 0));
+      arr.add(Product(
+        name: p.item1,
+        price: p.item2,
+        description: "",
+        quantity: 0,
+      ));
     }
     return arr;
   }
@@ -65,10 +69,11 @@ class _HomeState extends State<Home> {
       //For each catagory
       for (var j = 0; j < 5; j++) {
         childrenProd.add(Product(
-            name: i.toString(),
-            price: 1,
-            description: "description",
-            quantity: 1));
+          name: i.toString(),
+          price: 1,
+          description: "description",
+          quantity: 1,
+        ));
       }
       childrenCat.add(childrenProd);
     }
