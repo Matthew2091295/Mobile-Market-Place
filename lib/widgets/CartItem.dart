@@ -213,7 +213,6 @@ class _CartItem extends State<CartItem> {
       ),
     );
   }
-
   @override
   void dispose() {
     super.dispose();
