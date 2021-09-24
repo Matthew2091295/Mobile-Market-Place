@@ -76,8 +76,8 @@ class Personal extends StatelessWidget {
   Widget build(BuildContext context) {
     final innerHeight = contextHeight * 0.325;
 
-    String fullNames = "";
-    String username = "";
+    String fullNames = "Full Names";
+    String username = "Username";
     String birthDate = "";
 
     if ((Globals.firstName != null) && (Globals.lastName != null)) {
@@ -114,42 +114,51 @@ class Personal extends StatelessWidget {
                     right: 0,
                     bottom: 0,
                     top: (profilePictureRatio / 2) + padding,
-                    child: Column(
-                      children: [
-                        // USER FULL NAMES
-                        RichText(
-                          text: TextSpan(
-                            text: fullNames,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: darkYellow,
-                            ),
-                          ),
-                        ),
+                    child: Center(
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        spacing: 0.2,
+                        runSpacing: 0.2,
+                        children: <Widget>[
+                          Column(
+                            children: [
+                              // USER FULL NAMES
+                              RichText(
+                                text: TextSpan(
+                                  text: fullNames,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    color: darkYellow,
+                                  ),
+                                ),
+                              ),
 
-                        // USER EMAIL ADDRESS
-                        RichText(
-                          text: TextSpan(
-                            text: username,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: darkGrey,
-                            ),
-                          ),
-                        ),
+                              // USER EMAIL ADDRESS
+                              RichText(
+                                text: TextSpan(
+                                  text: username,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: darkGrey,
+                                  ),
+                                ),
+                              ),
 
-                        // USER BIRTH DATE
-                        RichText(
-                          text: TextSpan(
-                            text: birthDate,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: darkGrey,
-                            ),
+                              // USER BIRTH DATE
+                              RichText(
+                                text: TextSpan(
+                                  text: birthDate,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: darkGrey,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
