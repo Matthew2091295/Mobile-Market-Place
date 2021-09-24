@@ -83,11 +83,9 @@ class Personal extends StatelessWidget {
     if ((Globals.firstName != null) && (Globals.lastName != null)) {
       fullNames = Globals.firstName + " " + Globals.lastName;
     }
-
     if (Globals.username != null) {
       username = Globals.username;
     }
-
     if (Globals.birthDate != null) {
       birthDate = Globals.birthDate;
     }
