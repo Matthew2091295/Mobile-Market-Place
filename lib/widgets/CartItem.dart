@@ -24,7 +24,7 @@ class CartItem extends StatefulWidget {
     @required this.productName,
     @required this.productPrice,
     @required this.iconHeight,
-    @required this.bloc,
+    this.bloc,
   }) : super(key: key);
 
   final String productIcon;
