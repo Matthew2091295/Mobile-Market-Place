@@ -50,6 +50,11 @@ void main() {
             (testWidget) => fromRichTextToPlainText(testWidget) == "Total:"),
         findsOneWidget);
 
+    expect(
+        find.byWidgetPredicate(
+            (testWidget) => fromRichTextToPlainText(testWidget) == "(5 Items)"),
+        findsOneWidget);
+
     expect(find.widgetWithText(TextButton, "Checkout"), findsOneWidget);
   });
 }
