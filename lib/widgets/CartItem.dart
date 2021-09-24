@@ -42,8 +42,8 @@ class _CartItem extends State<CartItem> {
   double spinnerValue = 1;
   double oldSpinnerValue = 1;
 
-  _CartItem(
-      this.productIcon, this.productName, this.productPrice, this.iconHeight, this.bloc);
+  _CartItem(this.productIcon, this.productName, this.productPrice,
+      this.iconHeight, this.bloc);
   final String productIcon;
   final String productName;
   final double productPrice;
@@ -62,134 +62,154 @@ class _CartItem extends State<CartItem> {
     return Container(
       height: iconHeight * 1.12,
       width: double.infinity,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                flex: productIconFlex,
-                child: Container(
-                  height: iconHeight,
-                  padding: EdgeInsets.only(right: padding),
-                  child: Image.network(productIcon,
-                      height: iconHeight,
-                      width: iconHeight,
-                      fit: BoxFit.contain),
-                ),
-              ),
-              Expanded(
-                flex: productInfoFlex,
-                child: Container(
-                  height: iconHeight,
-                  child: Column(
+      child: Card(
+        elevation: 0,
+        child: Wrap(
+          direction: Axis.horizontal,
+          spacing: 0.2,
+          runSpacing: 0.2,
+          children: <Widget>[
+            Column(
+              children: [
+                Container(
+                  child: Row(
                     children: [
-                      Align(
-                        alignment: Alignment.topLeft,
+                      Expanded(
+                        flex: productIconFlex,
+                        child: Container(
+                          height: iconHeight,
+                          padding: EdgeInsets.only(right: padding),
+                          child: Image.network(productIcon,
+                              height: iconHeight,
+                              width: iconHeight,
+                              fit: BoxFit.contain),
+                        ),
+                      ),
+                      Expanded(
+                        flex: productInfoFlex,
                         child: Container(
                           height: iconHeight,
                           child: Column(
                             children: [
-                              Flexible(
-                                child: RichText(
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  text: TextSpan(
-                                    text: productName,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ),
                               Align(
                                 alignment: Alignment.topLeft,
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: "R" + newPrice,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Row(
-                                  children: [
-                                    RichText(
-                                      text: TextSpan(
-                                        text: "Qty: ",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: darkGrey,
+                                child: Container(
+                                  height: iconHeight,
+                                  child: Column(
+                                    children: [
+                                      Flexible(
+                                        child: RichText(
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          text: TextSpan(
+                                            text: productName,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SpinnerInput(
-                                      spinnerValue: spinnerValue,
-                                      minValue: 1,
-                                      maxValue: 100,
-                                      step: 1,
-                                      disabledLongPress: true,
-                                      disabledPopup: true,
-                                      plusButton:
-                                          SpinnerButtonStyle(color: darkYellow),
-                                      minusButton:
-                                          SpinnerButtonStyle(color: darkYellow),
-                                      onChange: (newValue) {
-                                        setState(() {
-                                          oldSpinnerValue = spinnerValue;
-                                          spinnerValue = newValue;
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: RichText(
+                                          text: TextSpan(
+                                            text: "R" + newPrice,
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Row(
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                text: "Qty: ",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: darkGrey,
+                                                ),
+                                              ),
+                                            ),
+                                            SpinnerInput(
+                                              spinnerValue: spinnerValue,
+                                              minValue: 1,
+                                              maxValue: 100,
+                                              step: 1,
+                                              disabledLongPress: true,
+                                              disabledPopup: true,
+                                              plusButton: SpinnerButtonStyle(
+                                                  color: darkYellow),
+                                              minusButton: SpinnerButtonStyle(
+                                                  color: darkYellow),
+                                              onChange: (newValue) {
+                                                setState(() {
+                                                  oldSpinnerValue =
+                                                      spinnerValue;
+                                                  spinnerValue = newValue;
 
-                                          if (oldSpinnerValue > spinnerValue) {
-                                            bloc.cartEventSink.add(
-                                                RemoveFromTotal(
-                                                    price: productPrice));
-                                          } else {
-                                            bloc.cartEventSink.add(AddToTotal(
-                                                price: productPrice));
-                                          }
-                                        });
-                                      },
-                                    )
-                                  ],
+                                                  if (oldSpinnerValue >
+                                                      spinnerValue) {
+                                                    bloc.cartEventSink.add(
+                                                        RemoveFromTotal(
+                                                            price:
+                                                                productPrice));
+                                                  } else {
+                                                    bloc.cartEventSink.add(
+                                                        AddToTotal(
+                                                            price:
+                                                                productPrice));
+                                                  }
+                                                });
+                                              },
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
+                      Expanded(
+                        flex: iconFlex,
+                        child: Container(
+                          height: iconHeight,
+                          child: Container(
+                            height: iconHeight,
+                            child: Center(
+                              child: Card(
+                                elevation: 0,
+                                child: IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  color: mediumGrey,
+                                  iconSize: 32,
+                                  onPressed: () {},
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                flex: iconFlex,
-                child: Container(
-                  height: iconHeight,
-                  child: Container(
-                    height: iconHeight,
-                    child: Center(
-                      child: IconButton(
-                        icon: const Icon(Icons.delete),
-                        color: mediumGrey,
-                        iconSize: 32,
-                        onPressed: () {},
-                      ),
-                    ),
-                  ),
+                Divider(
+                  thickness: 2,
                 ),
-              ),
-            ],
-          ),
-          Divider(
-            thickness: 2,
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
