@@ -11,7 +11,7 @@ class Product extends StatelessWidget {
       @required this.price,
       @required this.description,
       @required this.quantity,
-      this.image = ""})
+      this.image})
       : super(key: key);
   final String name;
   final int quantity;
@@ -21,6 +21,7 @@ class Product extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String path = "assets/images/" + this.name + ".jpg";
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
@@ -32,7 +33,7 @@ class Product extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Image.asset("assets/images/Clothes/Belt.jpg",
+                Image.asset(path,
                     height: 100,
                     width: 100,
                     fit: BoxFit.scaleDown, errorBuilder: (BuildContext context,
@@ -48,10 +49,11 @@ class Product extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) => ProductPage(
-                                  name: this.name,
-                                  description: this.description,
-                                  price: this.price,
-                                  quantity: this.quantity)));
+                                    name: this.name,
+                                    description: this.description,
+                                    price: this.price,
+                                    quantity: this.quantity,
+                                  )));
                     },
                     child: Text("More"))
               ],
