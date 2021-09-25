@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_place/pallete.dart';
 
 class Product extends StatelessWidget {
   const Product({

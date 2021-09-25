@@ -99,6 +99,7 @@ class _RegistrationState extends State<Registration> {
                         child: SizedBox(
                           width: 300,
                           height: 50,
+                          // ignore: deprecated_member_use
                           child: RaisedButton(
                             onPressed: () {
                               if (password.text != passwordconfirm.text) {
@@ -112,6 +113,7 @@ class _RegistrationState extends State<Registration> {
                                       content:
                                           new Text("Passwords do not match"),
                                       actions: <Widget>[
+                                        // ignore: deprecated_member_use
                                         new FlatButton(
                                           child: new Text("OK"),
                                           onPressed: () {
@@ -130,6 +132,7 @@ class _RegistrationState extends State<Registration> {
                                       title: new Text("Missing Details"),
                                       content: new Text("Email Missing"),
                                       actions: <Widget>[
+                                        // ignore: deprecated_member_use
                                         new FlatButton(
                                           child: new Text("OK"),
                                           onPressed: () {
@@ -149,6 +152,7 @@ class _RegistrationState extends State<Registration> {
                                       content: new Text(
                                           "First or Last name missing"),
                                       actions: <Widget>[
+                                        // ignore: deprecated_member_use
                                         new FlatButton(
                                           child: new Text("OK"),
                                           onPressed: () {
@@ -168,6 +172,7 @@ class _RegistrationState extends State<Registration> {
                                       title: new Text("Incorrect Details"),
                                       content: new Text("Passwords missing"),
                                       actions: <Widget>[
+                                        // ignore: deprecated_member_use
                                         new FlatButton(
                                           child: new Text("OK"),
                                           onPressed: () {
