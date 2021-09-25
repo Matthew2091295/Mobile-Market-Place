@@ -19,6 +19,7 @@ class RoundedButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         color: kBlue,
       ),
+      // ignore: deprecated_member_use
       child: FlatButton(
         onPressed: () {},
         child: Text(
