@@ -4,7 +4,6 @@ import 'package:market_place/Categories.dart';
 import 'package:market_place/Drawer.dart';
 import 'package:market_place/Home.dart';
 import 'package:market_place/Lists.dart';
-import 'package:market_place/More.dart';
 import 'package:market_place/Cart.dart';
 
 class HomePage extends StatefulWidget {
