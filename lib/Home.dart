@@ -1,6 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:market_place/widgets/widgets.dart';
 import 'package:tuple/tuple.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Home extends StatefulWidget {
   @override
@@ -8,50 +12,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var categories = {
-    "Clothes": [
-      Tuple2<String, double>("Shirt", 400),
-      Tuple2<String, double>("Pants", 500),
-      Tuple2<String, double>("Belt", 200),
-      Tuple2<String, double>("Socks", 150),
-      Tuple2<String, double>("Shoes", 300)
-    ],
-    "Food": [
-      Tuple2<String, double>("Chocolate", 200),
-      Tuple2<String, double>("Bread", 30),
-      Tuple2<String, double>("Sprite", 20),
-      Tuple2<String, double>("Mentos", 25),
-      Tuple2<String, double>("Cake", 100)
-    ],
-    "Games": [
-      Tuple2<String, double>("Monopoly", 200),
-      Tuple2<String, double>("Wood Puzzles", 130),
-      Tuple2<String, double>("Snakes and Ladders", 99),
-      Tuple2<String, double>("Cards", 25),
-      Tuple2<String, double>("Rummy", 150)
-    ],
-    "Sports": [
-      Tuple2<String, double>("Soccer Ball", 500),
-      Tuple2<String, double>("Rugby Ball", 180),
-      Tuple2<String, double>("Chelsea Shirt", 800),
-      Tuple2<String, double>("SA Rugby Shirt", 400),
-      Tuple2<String, double>("Tennis Set", 2000)
-    ],
-    "Technology": [
-      Tuple2<String, double>("iPhone", 19000),
-      Tuple2<String, double>("Laptop", 6000),
-      Tuple2<String, double>("iPad", 5000),
-      Tuple2<String, double>("Headphones", 200),
-      Tuple2<String, double>("USB", 150)
-    ]
-  };
+  getMethod() async {
+    String theUrl =
+        "https://lamp.ms.wits.ac.za/home/s1854457/getItems.php"; //connecting to Wits database
+    var res = await http
+        .get(Uri.encodeFull(theUrl), headers: {"Accept": "application/json"});
+    var responseBody = json.decode(res.body);
 
-  returnProduct(String cat) {
-    var products = categories[cat];
+    print(responseBody);
+
+    return responseBody;
+  }
+
+  returnProduct(String cat, List snap) {
     final arr = <Widget>[];
-    for (var p in products) {
-      arr.add(
-          Product(name: p.item1, price: p.item2, description: "", quantity: 0));
+    for (int i = 0; i < snap.length; i++) {
+      if (snap[i]['category'] == cat && snap[i]['name'] != "NULL") {
+        print(snap[i]);
+        arr.add(Product(
+            name: snap[i]['name'],
+            price: double.parse(snap[i]['price']),
+            description: snap[i]['description'],
+            quantity: int.parse(snap[i]['stock_remaining'])));
+      }
     }
     return arr;
   }
@@ -64,10 +47,11 @@ class _HomeState extends State<Home> {
       //For each catagory
       for (var j = 0; j < 5; j++) {
         childrenProd.add(Product(
-            name: i.toString(),
-            price: 1,
-            description: "description",
-            quantity: 1));
+          name: i.toString(),
+          price: 1,
+          description: "description",
+          quantity: 1,
+        ));
       }
       childrenCat.add(childrenProd);
     }
@@ -76,148 +60,163 @@ class _HomeState extends State<Home> {
           backgroundColor: Color.fromRGBO(206, 166, 97, 1.0),
           title: Text("Market Place"),
         ),
-        body: ListView(children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 25),
-            child: Text(
-              "Clothes",
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 20),
-            height: 225,
-            child: (ListView(
-              // This next line does the trick.
-              scrollDirection: Axis.horizontal,
-              children: returnProduct("Clothes"),
-            )),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("View More"),
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size(140, 36),
-                    primary: Color.fromRGBO(206, 166, 97, 1.0)),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 25),
-            child: Text(
-              "Food",
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 20),
-            height: 225,
-            child: (ListView(
-              // This next line does the trick.
-              scrollDirection: Axis.horizontal,
-              children: returnProduct("Food"),
-            )),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () {},
-                  child: Text("View More"),
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(140, 36),
-                      primary: Color.fromRGBO(206, 166, 97, 1.0))),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 25),
-            child: Text(
-              "Games",
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 20),
-            height: 225,
-            child: (ListView(
-              // This next line does the trick.
-              scrollDirection: Axis.horizontal,
-              children: returnProduct("Games"),
-            )),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () {},
-                  child: Text("View More"),
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(140, 36),
-                      primary: Color.fromRGBO(206, 166, 97, 1.0))),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 25),
-            child: Text(
-              "Sports",
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 20),
-            height: 225,
-            child: (ListView(
-              // This next line does the trick.
-              scrollDirection: Axis.horizontal,
-              children: returnProduct("Sports"),
-            )),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () {},
-                  child: Text("View More"),
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(140, 36),
-                      primary: Color.fromRGBO(206, 166, 97, 1.0))),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 25),
-            child: Text(
-              "Technology",
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 20),
-            height: 225,
-            child: (ListView(
-              // This next line does the trick.
-              scrollDirection: Axis.horizontal,
-              children: returnProduct("Technology"),
-            )),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () {},
-                  child: Text("View More"),
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(140, 36),
-                      primary: Color.fromRGBO(206, 166, 97, 1.0))),
-            ],
-          ),
-        ]));
+        body: FutureBuilder(
+            future: getMethod(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              List snap = snapshot.data;
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error fetching Data"),
+                );
+              }
+              return ListView(children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: Text(
+                    "Clothes",
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  height: 225,
+                  child: (ListView(
+                    // This next line does the trick.
+                    scrollDirection: Axis.horizontal,
+                    children: returnProduct("Clothes", snap),
+                  )),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text("View More"),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(140, 36),
+                          primary: Color.fromRGBO(206, 166, 97, 1.0)),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: Text(
+                    "Food",
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  height: 225,
+                  child: (ListView(
+                    // This next line does the trick.
+                    scrollDirection: Axis.horizontal,
+                    children: returnProduct("Food", snap),
+                  )),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {},
+                        child: Text("View More"),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(140, 36),
+                            primary: Color.fromRGBO(206, 166, 97, 1.0))),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: Text(
+                    "Games",
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  height: 225,
+                  child: (ListView(
+                    // This next line does the trick.
+                    scrollDirection: Axis.horizontal,
+                    children: returnProduct("Games", snap),
+                  )),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {},
+                        child: Text("View More"),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(140, 36),
+                            primary: Color.fromRGBO(206, 166, 97, 1.0))),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: Text(
+                    "Sports",
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  height: 225,
+                  child: (ListView(
+                    // This next line does the trick.
+                    scrollDirection: Axis.horizontal,
+                    children: returnProduct("Sports", snap),
+                  )),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {},
+                        child: Text("View More"),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(140, 36),
+                            primary: Color.fromRGBO(206, 166, 97, 1.0))),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: Text(
+                    "Technology",
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  height: 225,
+                  child: (ListView(
+                    // This next line does the trick.
+                    scrollDirection: Axis.horizontal,
+                    children: returnProduct("Technology", snap),
+                  )),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {},
+                        child: Text("View More"),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(140, 36),
+                            primary: Color.fromRGBO(206, 166, 97, 1.0))),
+                  ],
+                ),
+              ]);
+            }));
   }
 }

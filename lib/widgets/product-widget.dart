@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:market_place/pallete.dart';
+import 'package:market_place/ProductPage.dart';
+import 'dart:io';
+
 
 class Product extends StatelessWidget {
-  const Product({
-    Key key,
-    //Image
-    @required this.name,
-    @required this.price,
-    @required this.description,
-    @required this.quantity,
-  }) : super(key: key);
+  const Product(
+      {Key key,
+      //Image
+      @required this.name,
+      @required this.price,
+      @required this.description,
+      @required this.quantity,
+      this.image})
+      : super(key: key);
   final String name;
   final int quantity;
   final double price;
   final String description;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
+    String path = "assets/images/" + this.name + ".jpg";
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
@@ -27,20 +34,29 @@ class Product extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Image(
-                    image: NetworkImage(
-                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                Image.asset(path,
                     height: 100,
                     width: 100,
-                    fit: BoxFit.scaleDown,
-                    errorBuilder: (BuildContext context, Object exception,
-                        StackTrace stackTrace) {
-                      return Text('Error fetching Image');
-                    }),
+                    fit: BoxFit.scaleDown, errorBuilder: (BuildContext context,
+                        Object exception, StackTrace stackTrace) {
+                  return Text('Error fetching Image');
+                }),
                 Text(this.name),
                 Text("R" + this.price.toStringAsFixed(2)),
                 Text("Quantity: " + this.quantity.toString()),
-                ElevatedButton(onPressed: () {}, child: Text("More"))
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => ProductPage(
+                                    name: this.name,
+                                    description: this.description,
+                                    price: this.price,
+                                    quantity: this.quantity,
+                                  )));
+                    },
+                    child: Text("More"))
               ],
             ),
           )),
