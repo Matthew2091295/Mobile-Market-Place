@@ -74,51 +74,48 @@ class _CartState extends State<Cart> {
           title: Text("Cart"),
           automaticallyImplyLeading: false,
           backgroundColor: darkYellow,
-
         ),
-        body: Center(
-          child: Container(
-            color: Colors.white,
-            padding: EdgeInsets.only(left: padding, top: padding, right: padding),
-            child: ListView(
-              children: [
-                CartItem(
-                  productIcon: productIcon1,
-                  productName: productName1,
-                  productPrice: productPrice1,
-                  iconHeight: iconHeight,
-                  bloc: _bloc,
-                ),
-                CartItem(
-                  productIcon: productIcon2,
-                  productName: productName2,
-                  productPrice: productPrice2,
-                  iconHeight: iconHeight,
-                  bloc: _bloc,
-                ),
-                CartItem(
-                  productIcon: productIcon3,
-                  productName: productName3,
-                  productPrice: productPrice3,
-                  iconHeight: iconHeight,
-                  bloc: _bloc,
-                ),
-                CartItem(
-                  productIcon: productIcon4,
-                  productName: productName4,
-                  productPrice: productPrice4,
-                  iconHeight: iconHeight,
-                  bloc: _bloc,
-                ),
-                CartItem(
-                  productIcon: productIcon5,
-                  productName: productName5,
-                  productPrice: productPrice5,
-                  iconHeight: iconHeight,
-                  bloc: _bloc,
-                ),
-              ],
-            ),
+        body: Container(
+          color: Colors.white,
+          padding: EdgeInsets.only(left: padding, top: padding, right: padding),
+          child: ListView(
+            children: [
+              CartItem(
+                productIcon: productIcon1,
+                productName: productName1,
+                productPrice: productPrice1,
+                iconHeight: iconHeight,
+                bloc: _bloc,
+              ),
+              CartItem(
+                productIcon: productIcon2,
+                productName: productName2,
+                productPrice: productPrice2,
+                iconHeight: iconHeight,
+                bloc: _bloc,
+              ),
+              CartItem(
+                productIcon: productIcon3,
+                productName: productName3,
+                productPrice: productPrice3,
+                iconHeight: iconHeight,
+                bloc: _bloc,
+              ),
+              CartItem(
+                productIcon: productIcon4,
+                productName: productName4,
+                productPrice: productPrice4,
+                iconHeight: iconHeight,
+                bloc: _bloc,
+              ),
+              CartItem(
+                productIcon: productIcon5,
+                productName: productName5,
+                productPrice: productPrice5,
+                iconHeight: iconHeight,
+                bloc: _bloc,
+              ),
+            ],
           ),
         ),
         persistentFooterButtons: [
@@ -188,7 +185,7 @@ class _CartState extends State<Cart> {
                     textStyle: const TextStyle(fontSize: 24),
                   ),
                   onPressed: () {
-                    // Need to close _bloc some
+                    // Need to close _bloc 
                   },
                   child: const Text('Checkout'),
                 ),

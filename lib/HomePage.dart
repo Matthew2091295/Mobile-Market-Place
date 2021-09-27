@@ -4,7 +4,6 @@ import 'package:market_place/Categories.dart';
 import 'package:market_place/Drawer.dart';
 import 'package:market_place/Home.dart';
 import 'package:market_place/Lists.dart';
-import 'package:market_place/More.dart';
 import 'package:market_place/Cart.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,21 +35,25 @@ class _HomePageState extends State<HomePage> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
+              // ignore: deprecated_member_use
               title: Text("Home"),
               backgroundColor: Colors.red,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.category),
+              // ignore: deprecated_member_use
               title: Text("Categories"),
               backgroundColor: Colors.grey,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history_toggle_off_outlined),
+              // ignore: deprecated_member_use
               title: Text("Deals"),
               backgroundColor: Colors.yellow,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
+              // ignore: deprecated_member_use
               title: Text("Cart"),
               backgroundColor: Colors.pink,
             ),

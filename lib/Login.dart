@@ -128,6 +128,7 @@ class _LoginState extends State<Login> {
                               child: SizedBox(
                                 width: 300,
                                 height: 50,
+                                // ignore: deprecated_member_use
                                 child: RaisedButton(
                                   onPressed: () {
                                     //fetching and checking login details
@@ -154,6 +155,7 @@ class _LoginState extends State<Login> {
                                             content: new Text(
                                                 "Username or Password is incorrect"),
                                             actions: <Widget>[
+                                              // ignore: deprecated_member_use
                                               new FlatButton(
                                                 child: new Text("OK"),
                                                 onPressed: () {

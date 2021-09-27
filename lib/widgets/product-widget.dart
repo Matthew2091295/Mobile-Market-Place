@@ -3,6 +3,7 @@ import 'package:market_place/pallete.dart';
 import 'package:market_place/ProductPage.dart';
 import 'dart:io';
 
+
 class Product extends StatelessWidget {
   const Product(
       {Key key,

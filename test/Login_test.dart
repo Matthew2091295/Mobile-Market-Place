@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:market_place/Login.dart';
 import 'package:market_place/widgets/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:market_place/pallete.dart';
 
 void main() {
   testWidgets(
@@ -17,6 +15,7 @@ void main() {
 
     expect(find.widgetWithText(TextInputField, "Username"), findsOneWidget);
     expect(find.widgetWithText(PasswordInput, "Password"), findsOneWidget);
+    // ignore: deprecated_member_use
     expect(find.widgetWithText(RaisedButton, "Login"), findsOneWidget);
   });
 }
