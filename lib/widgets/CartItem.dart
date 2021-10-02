@@ -1,16 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:market_place/CartEvent.dart';
-import 'package:spinner_input/spinner_input.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:market_place/Providers.dart';
+import 'package:spinner_input/spinner_input.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final double padding = 8.0;
 
 final lightGrey = Color(0xFFA0A0A0);
 final mediumGrey = Color(0xFF414141);
 final darkGrey = Color(0xFF222222);
-
-final lightBlue = Color(0xFF679AF1);
-final darkBlue = Color(0xFF082352);
 
 final lightYellow = Color(0xFFDFC598);
 final darkYellow = Color(0xFFCEA661);
@@ -24,18 +22,16 @@ class CartItem extends StatefulWidget {
     @required this.productName,
     @required this.productPrice,
     @required this.iconHeight,
-    this.bloc,
   }) : super(key: key);
 
   final String productIcon;
   final String productName;
   final double productPrice;
   final double iconHeight;
-  final bloc;
 
   @override
   _CartItem createState() =>
-      _CartItem(productIcon, productName, productPrice, iconHeight, bloc);
+      _CartItem(productIcon, productName, productPrice, iconHeight);
 }
 
 class _CartItem extends State<CartItem> {
@@ -43,12 +39,11 @@ class _CartItem extends State<CartItem> {
   double oldSpinnerValue = 1;
 
   _CartItem(this.productIcon, this.productName, this.productPrice,
-      this.iconHeight, this.bloc);
+      this.iconHeight);
   final String productIcon;
   final String productName;
   final double productPrice;
   final double iconHeight;
-  final bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -156,15 +151,15 @@ class _CartItem extends State<CartItem> {
 
                                                   if (oldSpinnerValue >
                                                       spinnerValue) {
-                                                    bloc.cartEventSink.add(
-                                                        RemoveFromTotal(
-                                                            price:
-                                                                productPrice));
+                                                    context
+                                                        .read(cartProvider)
+                                                        .removeFromTotal(
+                                                            productPrice);
                                                   } else {
-                                                    bloc.cartEventSink.add(
-                                                        AddToTotal(
-                                                            price:
-                                                                productPrice));
+                                                    context
+                                                        .read(cartProvider)
+                                                        .addToTotal(
+                                                            productPrice);
                                                   }
                                                 });
                                               },
@@ -212,9 +207,5 @@ class _CartItem extends State<CartItem> {
         ),
       ),
     );
-  }
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
