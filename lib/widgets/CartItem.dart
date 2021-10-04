@@ -21,32 +21,31 @@ class CartItem extends StatefulWidget {
     @required this.productIcon,
     @required this.productName,
     @required this.productPrice,
-    @required this.iconHeight,
   }) : super(key: key);
 
   final String productIcon;
   final String productName;
   final double productPrice;
-  final double iconHeight;
 
   @override
   _CartItem createState() =>
-      _CartItem(productIcon, productName, productPrice, iconHeight);
+      _CartItem(productIcon, productName, productPrice);
 }
 
 class _CartItem extends State<CartItem> {
   double spinnerValue = 1;
   double oldSpinnerValue = 1;
 
-  _CartItem(this.productIcon, this.productName, this.productPrice,
-      this.iconHeight);
+  _CartItem(this.productIcon, this.productName, this.productPrice);
   final String productIcon;
   final String productName;
   final double productPrice;
-  final double iconHeight;
 
   @override
   Widget build(BuildContext context) {
+    double contextHeight = MediaQuery.of(context).size.height;
+    double iconHeight = contextHeight * 0.18;
+
     int productIconFlex = 4;
     int productInfoFlex = 4;
     int iconFlex = 1;
