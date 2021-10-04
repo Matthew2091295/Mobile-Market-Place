@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:spinner_input/spinner_input.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-
 import 'package:market_place/widgets/CartItem.dart';
 
 final currencyFormat = new NumberFormat("#,##0.00", "en_US");
@@ -36,7 +35,6 @@ void main() {
           productIcon: productIcon,
           productName: productName,
           productPrice: productPrice,
-          iconHeight: iconHeight,
         )));
 
     mockNetworkImagesFor(() => tester.pumpWidget(testWidget));
@@ -50,7 +48,6 @@ void main() {
           productIcon: productIcon,
           productName: productName,
           productPrice: productPrice,
-          iconHeight: iconHeight,
         )));
 
     await tester.pumpWidget(testWidget);
@@ -67,7 +64,7 @@ void main() {
         findsOneWidget);
   });
 
-  testWidgets("Test Spinner Input and Icon Button",
+  testWidgets("Test Spinner Input and Icon Button Existence",
       (WidgetTester tester) async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(),
@@ -76,7 +73,6 @@ void main() {
           productIcon: productIcon,
           productName: productName,
           productPrice: productPrice,
-          iconHeight: iconHeight,
         )));
 
     await tester.pumpWidget(testWidget);
