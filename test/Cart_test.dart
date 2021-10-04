@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:market_place/CartNotifier.dart';
+import 'package:market_place/Providers.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:market_place/Cart.dart';
@@ -34,7 +35,6 @@ void main() {
           productIcon: productIcon,
           productName: productName,
           productPrice: productPrice,
-          iconHeight: iconHeight,
         )));
 
     mockNetworkImagesFor(() => tester.pumpWidget(testWidget));
@@ -63,6 +63,18 @@ void main() {
   testWidgets("Test Cart Notifier", (WidgetTester tester) async {
     final cartNotifier = CartNotifier();
 
+    await tester.pumpWidget(ProviderScope(
+        overrides: [
+          cartProvider.overrideWithValue(cartNotifier),
+        ],
+        child: Consumer(builder: (context, watch, _) {
+          final total = watch(cartProvider).total;
+          return MaterialApp(
+              home: Container(
+            child: Text(total.toString()),
+          ));
+        })));
+
     double finalTotal = cartNotifier.total + productPrice;
     cartNotifier.addToTotal(productPrice);
     expect(cartNotifier.total, finalTotal);
@@ -70,5 +82,7 @@ void main() {
     finalTotal = cartNotifier.total - productPrice;
     cartNotifier.removeFromTotal(productPrice);
     expect(cartNotifier.total, finalTotal);
+
+    expect(find.text(finalTotal.toString()), findsOneWidget);
   });
 }
