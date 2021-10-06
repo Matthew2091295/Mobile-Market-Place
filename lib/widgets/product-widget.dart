@@ -23,9 +23,21 @@ class Product extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String path = "assets/images/" + this.name + ".jpg";
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => ProductPage(
+                      name: this.name,
+                      description: this.description,
+                      price: this.price,
+                      quantity: this.quantity,
+                    )));
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(15),
@@ -44,22 +56,12 @@ class Product extends StatelessWidget {
                 Text(this.name),
                 Text("R" + this.price.toStringAsFixed(2)),
                 Text("Quantity: " + this.quantity.toString()),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => ProductPage(
-                                    name: this.name,
-                                    description: this.description,
-                                    price: this.price,
-                                    quantity: this.quantity,
-                                  )));
-                    },
-                    child: Text("More"))
+                ElevatedButton(onPressed: () {}, child: Text("Add to cart"))
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
