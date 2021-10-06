@@ -140,6 +140,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_riverpod",
+      "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_riverpod-0.14.0+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_staggered_grid_view",
       "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.4.0",
       "packageUri": "lib/",
@@ -156,6 +162,12 @@
       "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.12.0",
       "packageUri": "lib/",
       "languageVersion": "2.0"
+    },
+    {
+      "name": "freezed_annotation",
+      "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/freezed_annotation-0.14.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "glob",
@@ -184,6 +196,12 @@
     {
       "name": "intl",
       "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "json_annotation",
+      "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -284,12 +302,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "provider",
-      "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/provider-3.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
       "name": "pub_semver",
       "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/pub_semver-2.1.0",
       "packageUri": "lib/",
@@ -298,6 +310,12 @@
     {
       "name": "quiver",
       "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "riverpod",
+      "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/riverpod-0.14.0+3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -328,6 +346,12 @@
     {
       "name": "stack_trace",
       "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "state_notifier",
+      "rootUri": "file:///C:/Src/flutter/.pub-cache/hosted/pub.dartlang.org/state_notifier-0.7.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -404,7 +428,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-09-25T19:18:34.888198Z",
+  "generated": "2021-10-06T14:38:52.148286Z",
   "generator": "pub",
   "generatorVersion": "2.15.0-42.0.dev"
 }
