@@ -119,7 +119,7 @@ class _CartState extends State<Cart> {
                         Spacer(),
                         Consumer(
                           builder: (context, watch, child) {
-                            final _total = watch(cartProvider).total;
+                            final _total = watch(totalProvider).total;
                             return Container(
                               child: RichText(
                                 text: TextSpan(
