@@ -33,35 +33,34 @@ class _UserPageState extends State<UserPage> {
     double contextHeight = MediaQuery.of(context).size.height;
     double profilePictureRatio = contextHeight * 0.2;
 
-    return SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text("User Page"),
-              backgroundColor: lightYellow,
-            ),
-            body: ListView(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(
-                      left: padding, top: padding, right: padding),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        lightYellow,
-                        darkYellow,
-                      ],
-                    ),
-                  ),
-                  child: ListView(
-                    children: [
-                      Personal(contextHeight, profilePictureRatio),
-                    ],
-                  ),
-                )
-              ],
-            )));
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("User Page"),
+          backgroundColor: lightYellow,
+        ),
+        body: ListView(
+          children: [
+            Container(
+              padding:
+                  EdgeInsets.only(left: padding, top: padding, right: padding),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    lightYellow,
+                    darkYellow,
+                  ],
+                ),
+              ),
+              child: ListView(
+                children: [
+                  Personal(contextHeight, profilePictureRatio),
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }
 
