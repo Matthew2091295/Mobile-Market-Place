@@ -8,10 +8,9 @@ void main() {
       (WidgetTester tester) async {
     Widget testWidget = new MediaQuery(
         data: new MediaQueryData(), child: new MaterialApp(home: new Home()));
-    //await tester.pumpWidget(testWidget);
+    await tester.pumpWidget(testWidget);
 
-    //expect(find.byType(Product), findsWidgets);
-    //expect(find.byType(ElevatedButton), findsWidgets);
-
+    expect(find.byType(Product), findsWidgets);
+    expect(find.byType(ElevatedButton), findsWidgets);
   });
 }
