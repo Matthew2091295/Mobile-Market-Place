@@ -38,7 +38,7 @@ class _ViewMoreState extends State<ViewMore> {
       if (snap[i]['category'] == cat && snap[i]['name'] != "NULL") {
         print(snap[i]);
         arr.add(Product(
-            productID: snap[i]['itemid'],
+            productID: int.parse(snap[i]['itemid']),
             name: snap[i]['name'],
             price: double.parse(snap[i]['price']),
             description: snap[i]['description'],
