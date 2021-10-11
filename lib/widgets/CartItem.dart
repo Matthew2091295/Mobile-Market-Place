@@ -151,12 +151,12 @@ class _CartItem extends State<CartItem> {
                                                   if (oldSpinnerValue >
                                                       spinnerValue) {
                                                     context
-                                                        .read(cartProvider)
+                                                        .read(totalProvider)
                                                         .removeFromTotal(
                                                             productPrice);
                                                   } else {
                                                     context
-                                                        .read(cartProvider)
+                                                        .read(totalProvider)
                                                         .addToTotal(
                                                             productPrice);
                                                   }
