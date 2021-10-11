@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:market_place/ViewMorePage.dart';
 import 'package:market_place/widgets/widgets.dart';
 import 'package:tuple/tuple.dart';
 import 'package:http/http.dart' as http;
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
       if (snap[i]['category'] == cat && snap[i]['name'] != "NULL") {
         print(snap[i]);
         arr.add(Product(
+            productID: snap[i]['itemid'],
             name: snap[i]['name'],
             price: double.parse(snap[i]['price']),
             description: snap[i]['description'],
@@ -81,7 +83,7 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 20),
-                  height: 225,
+                  height: 200,
                   child: (ListView(
                     // This next line does the trick.
                     scrollDirection: Axis.horizontal,
@@ -92,7 +94,13 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ViewMore(cat: "Clothes")));
+                      },
                       child: Text("View More"),
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(140, 36),
@@ -122,7 +130,13 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ViewMore(cat: "Food")));
+                        },
                         child: Text("View More"),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(140, 36),
@@ -151,7 +165,13 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ViewMore(cat: "Games")));
+                        },
                         child: Text("View More"),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(140, 36),
@@ -180,7 +200,13 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ViewMore(cat: "Sports")));
+                        },
                         child: Text("View More"),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(140, 36),
@@ -209,7 +235,13 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ViewMore(cat: "Technology")));
+                        },
                         child: Text("View More"),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(140, 36),
