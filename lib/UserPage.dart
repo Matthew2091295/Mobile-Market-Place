@@ -179,102 +179,98 @@ class _UserPageState extends State<UserPage> {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(25)),
                       ),
-                      child: Flexible(
-                        flex: 1,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(padding * 2),
-                              width: double.infinity,
-                              child: Row(
-                                children: [
-                                  RichText(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(padding * 2),
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    text: "Wallet",
+                                    style: TextStyle(
+                                      color: darkGrey,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Spacer(),
+                                Consumer(builder: (context, watch, child) {
+                                  final _wallet = watch(walletProvider).wallet;
+                                  return RichText(
                                     text: TextSpan(
-                                      text: "Wallet",
+                                      text:
+                                          "R" + currencyFormat.format(_wallet),
                                       style: TextStyle(
-                                        color: darkGrey,
+                                        color: darkYellow,
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  ),
-                                  Spacer(),
-                                  Consumer(builder: (context, watch, child) {
-                                    final _wallet =
-                                        watch(walletProvider).wallet;
-                                    return RichText(
-                                      text: TextSpan(
-                                        text: "R" +
-                                            currencyFormat.format(_wallet),
-                                        style: TextStyle(
-                                          color: darkYellow,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                ],
-                              ),
+                                  );
+                                }),
+                              ],
                             ),
-                            Spacer(),
-                            Container(
-                              padding: EdgeInsets.all(padding * 2),
-                              height: 140,
-                              width: double.infinity,
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.white,
-                                        backgroundColor: darkYellow,
-                                        textStyle: const TextStyle(
-                                          fontSize: 24,
-                                        ),
+                          ),
+                          Spacer(),
+                          Container(
+                            padding: EdgeInsets.all(padding * 2),
+                            height: 140,
+                            width: double.infinity,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.white,
+                                      backgroundColor: darkYellow,
+                                      textStyle: const TextStyle(
+                                        fontSize: 24,
                                       ),
-                                      onPressed: () {
-                                        var textInputDialog =
-                                            AddDialog(addController);
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) =>
-                                                textInputDialog);
-                                      },
-                                      child: const Text('Add'),
                                     ),
+                                    onPressed: () {
+                                      var textInputDialog =
+                                          AddDialog(addController);
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              textInputDialog);
+                                    },
+                                    child: const Text('Add'),
                                   ),
-                                  SizedBox(
-                                    height: padding,
-                                  ),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.white,
-                                        backgroundColor: darkYellow,
-                                        textStyle: const TextStyle(
-                                          fontSize: 24,
-                                        ),
+                                ),
+                                SizedBox(
+                                  height: padding,
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.white,
+                                      backgroundColor: darkYellow,
+                                      textStyle: const TextStyle(
+                                        fontSize: 24,
                                       ),
-                                      onPressed: () {
-                                        var textRemoveDialog =
-                                            RemoveDialog(removeController);
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) =>
-                                                textRemoveDialog);
-                                      },
-                                      child: const Text('Remove'),
                                     ),
-                                  )
-                                ],
-                              ),
+                                    onPressed: () {
+                                      var textRemoveDialog =
+                                          RemoveDialog(removeController);
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              textRemoveDialog);
+                                    },
+                                    child: const Text('Remove'),
+                                  ),
+                                )
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
