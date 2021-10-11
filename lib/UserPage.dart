@@ -54,7 +54,7 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
               child: SizedBox(
-                height: 650,
+                height: 850,
                 child: ListView(
                   children: [
                     Personal(contextHeight, profilePictureRatio),
