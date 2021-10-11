@@ -12,6 +12,8 @@ class MainDrawer extends StatelessWidget {
     String userNames = '';
     if ((Globals.firstName != null) && (Globals.lastName != null)) {
       userNames = Globals.firstName + " " + Globals.lastName;
+    } else {
+      userNames = "Test test";
     }
     return Drawer(
       child: Column(
@@ -30,8 +32,8 @@ class MainDrawer extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                          image: NetworkImage(
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkZbDUEjVgvlyfH7VMqo2SisML8Inhwvk6iQ&usqp=CAU",
+                          image: AssetImage(
+                            "assets/images/4.jpg",
                           ),
                           fit: BoxFit.fill),
                     ),
@@ -47,7 +49,7 @@ class MainDrawer extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    Globals.username,
+                    '${Globals.username ?? "Empty"}',
                     style: TextStyle(
                       color: Colors.black,
                     ),

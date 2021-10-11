@@ -10,7 +10,12 @@ void main() {
         data: new MediaQueryData(),
         child: new MaterialApp(
             home: new Product(
-                name: "Name", price: 10, description: "", quantity: 15)));
+          name: "Name",
+          price: 10,
+          description: "",
+          quantity: 15,
+          productID: 1,
+        )));
     await tester.pumpWidget(testWidget);
 
     expect(find.text("Name"), findsOneWidget);

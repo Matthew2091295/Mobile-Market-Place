@@ -53,6 +53,7 @@ class Product extends StatelessWidget {
                       description: this.description,
                       price: this.price,
                       quantity: this.quantity,
+                      productID: this.productID,
                     )));
       },
       child: Padding(

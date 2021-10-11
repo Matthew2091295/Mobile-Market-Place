@@ -3,22 +3,24 @@ import 'package:market_place/Drawer.dart';
 import 'package:market_place/widgets/widgets.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({
-    Key key,
-    @required this.name,
-    @required this.description,
-    @required this.price,
-    @required this.quantity,
-  }) : super(key: key);
+  const ProductPage(
+      {Key key,
+      @required this.name,
+      @required this.description,
+      @required this.price,
+      @required this.quantity,
+      @required this.productID})
+      : super(key: key);
 
   final String name;
   final String description;
   final double price;
   final int quantity;
+  final int productID;
 
   @override
   Widget build(BuildContext context) {
-    String path = "assets/images/" + this.name + ".jpg";
+    String path = "assets/images/" + this.productID.toString() + ".jpg";
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

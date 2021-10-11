@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:market_place/ViewMorePage.dart';
 import 'package:market_place/widgets/widgets.dart';
@@ -31,7 +29,7 @@ class _HomeState extends State<Home> {
       if (snap[i]['category'] == cat && snap[i]['name'] != "NULL") {
         print(snap[i]);
         arr.add(Product(
-            productID: snap[i]['itemid'],
+            productID: int.parse(snap[i]['itemid']),
             name: snap[i]['name'],
             price: double.parse(snap[i]['price']),
             description: snap[i]['description'],
@@ -53,6 +51,7 @@ class _HomeState extends State<Home> {
           price: 1,
           description: "description",
           quantity: 1,
+          productID: 0,
         ));
       }
       childrenCat.add(childrenProd);
@@ -83,7 +82,7 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 20),
-                  height: 200,
+                  height: 225,
                   child: (ListView(
                     // This next line does the trick.
                     scrollDirection: Axis.horizontal,
