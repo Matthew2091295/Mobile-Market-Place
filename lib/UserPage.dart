@@ -39,24 +39,28 @@ class _UserPageState extends State<UserPage> {
               title: Text("User Page"),
               backgroundColor: lightYellow,
             ),
-            body: Container(
-              padding:
-                  EdgeInsets.only(left: padding, top: padding, right: padding),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    lightYellow,
-                    darkYellow,
-                  ],
-                ),
-              ),
-              child: ListView(
-                children: [
-                  Personal(contextHeight, profilePictureRatio),
-                ],
-              ),
+            body: ListView(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(
+                      left: padding, top: padding, right: padding),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        lightYellow,
+                        darkYellow,
+                      ],
+                    ),
+                  ),
+                  child: ListView(
+                    children: [
+                      Personal(contextHeight, profilePictureRatio),
+                    ],
+                  ),
+                )
+              ],
             )));
   }
 }
