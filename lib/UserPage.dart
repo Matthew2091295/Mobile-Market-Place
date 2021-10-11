@@ -207,8 +207,10 @@ class Personal extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(25)),
             ),
-            child: ListView(children: [
-              Column(
+            child: Flexible(
+              flex: 1,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
                     padding: EdgeInsets.all(padding * 2),
@@ -298,7 +300,7 @@ class Personal extends StatelessWidget {
                   ),
                 ],
               ),
-            ]),
+            ),
           ),
         ),
       ],
