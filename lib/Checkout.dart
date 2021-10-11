@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:market_place/Providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:market_place/Globals.dart' as Globals;
 
 final double padding = 8.0;
 
@@ -13,13 +18,52 @@ final darkYellow = Color(0xFFCEA661);
 
 final currencyFormat = new NumberFormat("#,##0.00", "en_US");
 
-class Checkout extends StatelessWidget {
+class Checkout extends StatefulWidget {
+  Checkout({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _CheckoutState createState() => _CheckoutState();
+}
+
+class _CheckoutState extends State<Checkout> {
+
+  deleteCart() async {
+    String url = Globals.url + "deleteCart.php";
+
+    Map<String, String> parameters = {
+      'username': Globals.username,
+    };
+    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+
+    String query = Uri(queryParameters: parameters).query;
+    var requestUrl = url + '?' + query;
+    await http.get(requestUrl, headers: headers);
+  }
+
+  changeTotalAndCount(double total, double count) async {
+    String url = Globals.url + "changeTotalAndCount.php";
+
+    Map<String, String> parameters = {
+      'username': Globals.username,
+      'total': total.toString(),
+      'item_count': count.toString(),
+    };
+    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+
+    String query = Uri(queryParameters: parameters).query;
+    var requestUrl = url + '?' + query;
+    await http.get(requestUrl, headers: headers);
+  }
+
   final TextEditingController streetAddressController = TextEditingController();
   final TextEditingController suburbController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final TextEditingController provinceController = TextEditingController();
   final TextEditingController postCodeController = TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     double contextHeight = MediaQuery.of(context).size.height;
     double height = contextHeight * 0.18;
@@ -173,7 +217,7 @@ class Checkout extends StatelessWidget {
                       backgroundColor: darkYellow,
                       textStyle: const TextStyle(fontSize: 24),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (validateInformation(
                           streetAddressController,
                           suburbController,
@@ -188,13 +232,20 @@ class Checkout extends StatelessWidget {
                               builder: (BuildContext context) =>
                                   insufficientFundsDialog);
                         } else {
+                          deleteCart();
+                          changeTotalAndCount(0, 0);
+
+                          context.read(walletProvider).removeFromWallet(total);
+                          context.read(totalProvider).removeFromTotal(total);
+                          context.read(countProvider).clearCount();
+
                           var submitOrderDialog = AlertDialogSubmitOrder();
-                          showDialog(
+                          await showDialog(
                               context: context,
                               builder: (BuildContext context) =>
                                   submitOrderDialog);
-                          context.read(walletProvider).removeFromWallet(total);
-                          context.read(totalProvider).removeFromTotal(total);
+
+                          Navigator.pop(context);
                         }
                       } else {
                         var emptyFieldsDialog = AlertDialogEmptyFields();
