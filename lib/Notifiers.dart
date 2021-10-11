@@ -85,6 +85,7 @@ class CountNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  
   void deleteCount(double count) {
     _count -= count;
     notifyListeners();
