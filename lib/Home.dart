@@ -4,6 +4,7 @@ import 'package:market_place/widgets/widgets.dart';
 import 'package:tuple/tuple.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:market_place/Drawer.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -273,6 +274,7 @@ class _HomeState extends State<Home> {
       childrenCat.add(childrenProd);
     }
     return Scaffold(
+      drawer: MainDrawer(),
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(206, 166, 97, 1.0),
           title: Text("Market Place"),
