@@ -9,6 +9,9 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'Globals.dart' as Globals;
 
+import 'package:market_place/Providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 /*
 Adding Database integration to the application:
 
