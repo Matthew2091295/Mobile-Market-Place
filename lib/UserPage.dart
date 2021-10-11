@@ -207,96 +207,98 @@ class Personal extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(25)),
             ),
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(padding * 2),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text: "Wallet",
-                          style: TextStyle(
-                            color: darkGrey,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Spacer(),
-                      Consumer(builder: (context, watch, child) {
-                        final _wallet = watch(walletProvider).wallet;
-                        return RichText(
+            child: Row(children: [
+              Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(padding * 2),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        RichText(
                           text: TextSpan(
-                            text: "R" + currencyFormat.format(_wallet),
+                            text: "Wallet",
                             style: TextStyle(
-                              color: darkYellow,
+                              color: darkGrey,
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        );
-                      }),
-                    ],
-                  ),
-                ),
-                Spacer(),
-                Container(
-                  padding: EdgeInsets.all(padding * 2),
-                  height: 140,
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: darkYellow,
-                            textStyle: const TextStyle(
-                              fontSize: 24,
-                            ),
-                          ),
-                          onPressed: () {
-                            var textInputDialog = AddDialog(addController);
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    textInputDialog);
-                          },
-                          child: const Text('Add'),
                         ),
-                      ),
-                      SizedBox(
-                        height: padding,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: darkYellow,
-                            textStyle: const TextStyle(
-                              fontSize: 24,
+                        Spacer(),
+                        Consumer(builder: (context, watch, child) {
+                          final _wallet = watch(walletProvider).wallet;
+                          return RichText(
+                            text: TextSpan(
+                              text: "R" + currencyFormat.format(_wallet),
+                              style: TextStyle(
+                                color: darkYellow,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            var textRemoveDialog =
-                                RemoveDialog(removeController);
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    textRemoveDialog);
-                          },
-                          child: const Text('Remove'),
-                        ),
-                      )
-                    ],
+                          );
+                        }),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                  Spacer(),
+                  Container(
+                    padding: EdgeInsets.all(padding * 2),
+                    height: 140,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: darkYellow,
+                              textStyle: const TextStyle(
+                                fontSize: 24,
+                              ),
+                            ),
+                            onPressed: () {
+                              var textInputDialog = AddDialog(addController);
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      textInputDialog);
+                            },
+                            child: const Text('Add'),
+                          ),
+                        ),
+                        SizedBox(
+                          height: padding,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: darkYellow,
+                              textStyle: const TextStyle(
+                                fontSize: 24,
+                              ),
+                            ),
+                            onPressed: () {
+                              var textRemoveDialog =
+                                  RemoveDialog(removeController);
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      textRemoveDialog);
+                            },
+                            child: const Text('Remove'),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ]),
           ),
         ),
       ],
