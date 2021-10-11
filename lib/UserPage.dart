@@ -53,10 +53,13 @@ class _UserPageState extends State<UserPage> {
                   ],
                 ),
               ),
-              child: ListView(
-                children: [
-                  Personal(contextHeight, profilePictureRatio),
-                ],
+              child: SizedBox(
+                height: 650,
+                child: ListView(
+                  children: [
+                    Personal(contextHeight, profilePictureRatio),
+                  ],
+                ),
               ),
             )
           ],
