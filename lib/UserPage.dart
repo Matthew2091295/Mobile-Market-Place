@@ -207,7 +207,7 @@ class Personal extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(25)),
             ),
-            child: Row(children: [
+            child: ListView(children: [
               Column(
                 children: [
                   Container(
