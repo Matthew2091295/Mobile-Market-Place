@@ -107,10 +107,15 @@ class _CartState extends State<Cart> {
                     itemCount: _cart.length,
                     itemBuilder: (BuildContext context, int index) =>
                         Dismissible(
-                            key: Key(snapshot.data.toString()),
+                            key: UniqueKey(),
                             onDismissed: (direction) {
                               int productID = _cart[index];
-                              _cart.remove(index);
+
+                              setState(() {});
+
+                              setState(() {
+                                _cart.remove(index);
+                              });
                               deleteFromCart(productID);
 
                               double _price = context
@@ -120,8 +125,6 @@ class _CartState extends State<Cart> {
                               double _count = context
                                   .read(quantityProvider)
                                   .getCartQuantity(productID);
-
-                              
 
                               double _total = _price * _count;
 
@@ -211,10 +214,14 @@ class _CartState extends State<Cart> {
                           ),
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Checkout()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Checkout()))
+                                .then((value) {
+                              setState(() {
+                                _cart.clear();
+                              });
+                            });
                           },
                           child: const Text('Checkout'),
                         ),
