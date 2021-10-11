@@ -28,7 +28,6 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
-
   deleteCart() async {
     String url = Globals.url + "deleteCart.php";
 
@@ -49,6 +48,20 @@ class _CheckoutState extends State<Checkout> {
       'username': Globals.username,
       'total': total.toString(),
       'item_count': count.toString(),
+    };
+    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+
+    String query = Uri(queryParameters: parameters).query;
+    var requestUrl = url + '?' + query;
+    await http.get(requestUrl, headers: headers);
+  }
+
+  removeFromWallet(double wallet) async {
+    String url = Globals.url + "removeFromWallet.php";
+
+    Map<String, String> parameters = {
+      'username': Globals.username,
+      'wallet': wallet.toString(),
     };
     var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
 
@@ -233,6 +246,7 @@ class _CheckoutState extends State<Checkout> {
                                   insufficientFundsDialog);
                         } else {
                           deleteCart();
+                          removeFromWallet(total);
                           changeTotalAndCount(0, 0);
 
                           context.read(walletProvider).removeFromWallet(total);
