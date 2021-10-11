@@ -7,7 +7,6 @@ import 'package:market_place/Providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:http/http.dart' as http;
-
 import 'Globals.dart' as Globals;
 
 final double padding = 8.0;
@@ -21,7 +20,7 @@ final darkYellow = Color(0xFFCEA661);
 final currencyFormat = new NumberFormat("#,##0.00", "en_US");
 
 class UserPage extends StatefulWidget {
-  const UserPage({Key key}) : super(key: key);
+  UserPage({Key key}) : super(key: key);
 
   @override
   _UserPageState createState() => _UserPageState();
@@ -33,67 +32,6 @@ class _UserPageState extends State<UserPage> {
     double contextHeight = MediaQuery.of(context).size.height;
     double profilePictureRatio = contextHeight * 0.2;
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("User Page"),
-          backgroundColor: lightYellow,
-        ),
-        body: ListView(
-          children: [
-            Container(
-              padding:
-                  EdgeInsets.only(left: padding, top: padding, right: padding),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    lightYellow,
-                    darkYellow,
-                  ],
-                ),
-              ),
-              child: SizedBox(
-                height: 850,
-                child: ListView(
-                  children: [
-                    Personal(contextHeight, profilePictureRatio),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ));
-  }
-}
-
-class ProfilePicture extends StatelessWidget {
-  ProfilePicture(this.profilePictureRatio);
-  final double profilePictureRatio;
-
-  Widget build(BuildContext context) {
-    return Container(
-      height: profilePictureRatio,
-      width: profilePictureRatio,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          image: NetworkImage(
-            'https://img.favpng.com/2/24/4/user-profile-computer-icons-png-favpng-6CB3By2TFDKyEjfXFbx3LaRR5.jpg',
-          ),
-          fit: BoxFit.contain,
-        ),
-      ),
-    );
-  }
-}
-
-class Personal extends StatelessWidget {
-  Personal(this.contextHeight, this.profilePictureRatio);
-  final double contextHeight;
-  final double profilePictureRatio;
-
-  Widget build(BuildContext context) {
     final innerHeight = contextHeight * 0.325;
 
     String fullNames = "Full Names";
@@ -113,197 +51,239 @@ class Personal extends StatelessWidget {
     final TextEditingController addController = TextEditingController();
     final TextEditingController removeController = TextEditingController();
 
-    return Column(
-      children: [
-        Container(
-          height: innerHeight,
-          width: double.infinity,
-          child: Stack(
-            children: [
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                top: (profilePictureRatio) / 2,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(25)),
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        top: (profilePictureRatio / 2) + padding,
-                        child: Center(
-                          child: Wrap(
-                            direction: Axis.horizontal,
-                            spacing: 0.2,
-                            runSpacing: 0.2,
-                            children: <Widget>[
-                              Column(
-                                children: [
-                                  // USER FULL NAMES
-                                  RichText(
-                                    text: TextSpan(
-                                      text: fullNames,
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                        color: darkYellow,
-                                      ),
-                                    ),
-                                  ),
-
-                                  // USER EMAIL ADDRESS
-                                  RichText(
-                                    text: TextSpan(
-                                      text: username,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: darkGrey,
-                                      ),
-                                    ),
-                                  ),
-
-                                  // USER BIRTH DATE
-                                  RichText(
-                                    text: TextSpan(
-                                      text: birthDate,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: darkGrey,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                child: ProfilePicture(profilePictureRatio),
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("User Page"),
+        backgroundColor: lightYellow,
+      ),
+      body: Container(
+        height: double.infinity,
+        padding: EdgeInsets.only(left: padding, top: padding, right: padding),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              lightYellow,
+              darkYellow,
             ],
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: padding * 2,
-          ),
-          child: Container(
-            height: 200,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(25)),
-            ),
-            child: Flexible(
-              flex: 1,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(padding * 2),
+                    height: innerHeight,
                     width: double.infinity,
-                    child: Row(
+                    child: Stack(
                       children: [
-                        RichText(
-                          text: TextSpan(
-                            text: "Wallet",
-                            style: TextStyle(
-                              color: darkGrey,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          top: (profilePictureRatio) / 2,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  top: (profilePictureRatio / 2) + padding,
+                                  child: Center(
+                                    child: Wrap(
+                                      direction: Axis.horizontal,
+                                      spacing: 0.2,
+                                      runSpacing: 0.2,
+                                      children: <Widget>[
+                                        Column(
+                                          children: [
+                                            // USER FULL NAMES
+                                            RichText(
+                                              text: TextSpan(
+                                                text: fullNames,
+                                                style: TextStyle(
+                                                  fontSize: 25,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: darkYellow,
+                                                ),
+                                              ),
+                                            ),
+
+                                            // USER EMAIL ADDRESS
+                                            RichText(
+                                              text: TextSpan(
+                                                text: username,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: darkGrey,
+                                                ),
+                                              ),
+                                            ),
+
+                                            // USER BIRTH DATE
+                                            RichText(
+                                              text: TextSpan(
+                                                text: birthDate,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: darkGrey,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                        Spacer(),
-                        Consumer(builder: (context, watch, child) {
-                          final _wallet = watch(walletProvider).wallet;
-                          return RichText(
-                            text: TextSpan(
-                              text: "R" + currencyFormat.format(_wallet),
-                              style: TextStyle(
-                                color: darkYellow,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            height: profilePictureRatio,
+                            width: profilePictureRatio,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  'https://img.favpng.com/2/24/4/user-profile-computer-icons-png-favpng-6CB3By2TFDKyEjfXFbx3LaRR5.jpg',
+                                ),
+                                fit: BoxFit.contain,
                               ),
                             ),
-                          );
-                        }),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                  Spacer(),
-                  Container(
-                    padding: EdgeInsets.all(padding * 2),
-                    height: 140,
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: darkYellow,
-                              textStyle: const TextStyle(
-                                fontSize: 24,
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: padding * 2,
+                    ),
+                    child: Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      child: Flexible(
+                        flex: 1,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(padding * 2),
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      text: "Wallet",
+                                      style: TextStyle(
+                                        color: darkGrey,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Consumer(builder: (context, watch, child) {
+                                    final _wallet =
+                                        watch(walletProvider).wallet;
+                                    return RichText(
+                                      text: TextSpan(
+                                        text: "R" +
+                                            currencyFormat.format(_wallet),
+                                        style: TextStyle(
+                                          color: darkYellow,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                ],
                               ),
                             ),
-                            onPressed: () {
-                              var textInputDialog = AddDialog(addController);
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      textInputDialog);
-                            },
-                            child: const Text('Add'),
-                          ),
-                        ),
-                        SizedBox(
-                          height: padding,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: darkYellow,
-                              textStyle: const TextStyle(
-                                fontSize: 24,
+                            Spacer(),
+                            Container(
+                              padding: EdgeInsets.all(padding * 2),
+                              height: 140,
+                              width: double.infinity,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        primary: Colors.white,
+                                        backgroundColor: darkYellow,
+                                        textStyle: const TextStyle(
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        var textInputDialog =
+                                            AddDialog(addController);
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                textInputDialog);
+                                      },
+                                      child: const Text('Add'),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: padding,
+                                  ),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        primary: Colors.white,
+                                        backgroundColor: darkYellow,
+                                        textStyle: const TextStyle(
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        var textRemoveDialog =
+                                            RemoveDialog(removeController);
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                textRemoveDialog);
+                                      },
+                                      child: const Text('Remove'),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                            onPressed: () {
-                              var textRemoveDialog =
-                                  RemoveDialog(removeController);
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      textRemoveDialog);
-                            },
-                            child: const Text('Remove'),
-                          ),
-                        )
-                      ],
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
-              ),
-            ),
+              )
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
@@ -545,4 +525,3 @@ class RemoveDialog extends StatelessWidget {
     );
   }
 }
-
