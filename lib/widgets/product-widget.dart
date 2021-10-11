@@ -42,7 +42,7 @@ class Product extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String path = "assets/images/" + this.name + ".jpg";
+    String path = "assets/images/" + this.productID.toString() + ".jpg";
     return GestureDetector(
       onTap: () {
         Navigator.push(

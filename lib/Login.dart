@@ -9,6 +9,9 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'Globals.dart' as Globals;
 
+import 'package:market_place/Providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 /*
 Adding Database integration to the application:
 
@@ -56,6 +59,14 @@ class _LoginState extends State<Login> {
     Globals.firstName = snap[index]['first_name'];
     Globals.lastName = snap[index]['last_name'];
     Globals.birthDate = snap[index]['date_of_birth'];
+    
+    String wallet = snap[index]['available_money'];
+    String total = snap[index]['total'];
+    String count = snap[index]['item_count'];
+
+    context.read(walletProvider).setWallet(double.tryParse(wallet));
+    context.read(totalProvider).setTotal(double.tryParse(total));
+    context.read(countProvider).setCount(double.tryParse(count));
   }
 
   @override
