@@ -240,11 +240,15 @@ class _HomeState extends State<Home> {
 
   returnProduct(String cat, List snap) {
     final arr = <Widget>[];
+    int i = 0;
+    int r = 0;
     if (snap?.isEmpty ?? true) {
       snap = listDefault();
     }
-    for (int i = 0; i < snap.length; i++) {
+    while (r < 5) {
+      i++;
       if (snap[i]['category'] == cat && snap[i]['name'] != "NULL") {
+        r++;
         arr.add(Product(
             productID: int.parse(snap[i]['itemid']),
             name: snap[i]['name'],
