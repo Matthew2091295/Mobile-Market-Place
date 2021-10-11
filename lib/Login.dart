@@ -56,6 +56,14 @@ class _LoginState extends State<Login> {
     Globals.firstName = snap[index]['first_name'];
     Globals.lastName = snap[index]['last_name'];
     Globals.birthDate = snap[index]['date_of_birth'];
+    
+    String wallet = snap[index]['available_money'];
+    String total = snap[index]['total'];
+    String count = snap[index]['item_count'];
+
+    context.read(walletProvider).setWallet(double.tryParse(wallet));
+    context.read(totalProvider).setTotal(double.tryParse(total));
+    context.read(countProvider).setCount(double.tryParse(count));
   }
 
   @override
