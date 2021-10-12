@@ -35,7 +35,7 @@ class _RegistrationState extends State<Registration> {
       "password": password
     };
 
-    var response = await http.post(theUrl, body: json.encode(data));
+    var response = await http.post(Uri.parse(theUrl), body: json.encode(data));
     print(response.body);
   }
 

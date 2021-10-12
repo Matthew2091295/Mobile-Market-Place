@@ -57,7 +57,7 @@ class _CartItem extends State<CartItem> {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    var response = await http.get(requestUrl, headers: headers);
+    var response = await http.get(Uri.parse(requestUrl), headers: headers);
     var responseBody = json.decode(response.body);
 
     return responseBody;
@@ -75,7 +75,7 @@ class _CartItem extends State<CartItem> {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    await http.get(requestUrl, headers: headers);
+    await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
   changeTotalAndCount(double total, double count) async {
@@ -90,7 +90,7 @@ class _CartItem extends State<CartItem> {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    await http.get(requestUrl, headers: headers);
+    await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
   @override

@@ -37,7 +37,7 @@ class Product extends StatelessWidget {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    await http.get(requestUrl, headers: headers);
+    await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
   @override

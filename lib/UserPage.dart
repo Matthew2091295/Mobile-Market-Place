@@ -182,37 +182,40 @@ class _UserPageState extends State<UserPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Container(
-                            padding: EdgeInsets.all(padding * 2),
-                            width: double.infinity,
-                            child: Row(
-                              children: [
-                                RichText(
-                                  text: TextSpan(
-                                    text: "Wallet",
-                                    style: TextStyle(
-                                      color: darkGrey,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Spacer(),
-                                Consumer(builder: (context, watch, child) {
-                                  final _wallet = watch(walletProvider).wallet;
-                                  return RichText(
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.all(padding * 2),
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  RichText(
                                     text: TextSpan(
-                                      text:
-                                          "R" + currencyFormat.format(_wallet),
+                                      text: "Wallet",
                                       style: TextStyle(
-                                        color: darkYellow,
+                                        color: darkGrey,
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  );
-                                }),
-                              ],
+                                  ),
+                                  Spacer(),
+                                  Consumer(builder: (context, watch, child) {
+                                    final _wallet =
+                                        watch(walletProvider).wallet;
+                                    return RichText(
+                                      text: TextSpan(
+                                        text: "R" +
+                                            currencyFormat.format(_wallet),
+                                        style: TextStyle(
+                                          color: darkYellow,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                ],
+                              ),
                             ),
                           ),
                           Spacer(),
@@ -299,7 +302,7 @@ class AddDialog extends StatelessWidget {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    await http.get(requestUrl, headers: headers);
+    await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
   bool validAmount(String value) {
@@ -416,7 +419,7 @@ class RemoveDialog extends StatelessWidget {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    await http.get(requestUrl, headers: headers);
+    await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
   @override
