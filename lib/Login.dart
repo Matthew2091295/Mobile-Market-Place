@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
     String theUrl =
         "https://lamp.ms.wits.ac.za/home/s1854457/getData.php"; //connecting to Wits database
     var res = await http
-        .get(Uri.encodeFull(theUrl), headers: {"Accept": "application/json"});
+        .get(Uri.parse(theUrl), headers: {"Accept": "application/json"});
     var responseBody = json.decode(res.body);
 
     print(responseBody);
@@ -59,7 +59,7 @@ class _LoginState extends State<Login> {
     Globals.firstName = snap[index]['first_name'];
     Globals.lastName = snap[index]['last_name'];
     Globals.birthDate = snap[index]['date_of_birth'];
-    
+
     String wallet = snap[index]['available_money'];
     String total = snap[index]['total'];
     String count = snap[index]['item_count'];

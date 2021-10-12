@@ -38,7 +38,7 @@ class _CheckoutState extends State<Checkout> {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    await http.get(requestUrl, headers: headers);
+    await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
   changeTotalAndCount(double total, double count) async {
@@ -53,7 +53,7 @@ class _CheckoutState extends State<Checkout> {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    await http.get(requestUrl, headers: headers);
+    await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
   removeFromWallet(double wallet) async {
@@ -67,7 +67,7 @@ class _CheckoutState extends State<Checkout> {
 
     String query = Uri(queryParameters: parameters).query;
     var requestUrl = url + '?' + query;
-    await http.get(requestUrl, headers: headers);
+    await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
   final TextEditingController streetAddressController = TextEditingController();

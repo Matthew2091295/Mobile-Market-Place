@@ -24,7 +24,7 @@ class _ViewMoreState extends State<ViewMore> {
     String theUrl =
         "https://lamp.ms.wits.ac.za/home/s1854457/getItems.php"; //connecting to Wits database
     var res = await http
-        .get(Uri.encodeFull(theUrl), headers: {"Accept": "application/json"});
+        .get(Uri.parse(theUrl), headers: {"Accept": "application/json"});
     var responseBody = json.decode(res.body);
 
     print(responseBody);
@@ -69,7 +69,8 @@ class _ViewMoreState extends State<ViewMore> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 1,
                   mainAxisSpacing: 20,
-                  shrinkWrap: false,
+                  shrinkWrap: true,
+                  childAspectRatio: 0.8,
                   children: returnProduct(widget.cat, snap),
                 ),
               );

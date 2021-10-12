@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
     String theUrl =
         "https://lamp.ms.wits.ac.za/home/s1854457/getItems.php"; //connecting to Wits database
     var res = await http
-        .get(Uri.encodeFull(theUrl), headers: {"Accept": "application/json"});
+        .get(Uri.parse(theUrl), headers: {"Accept": "application/json"});
     var responseBody = json.decode(res.body);
 
     print(responseBody);
@@ -240,15 +240,14 @@ class _HomeState extends State<Home> {
 
   returnProduct(String cat, List snap) {
     final arr = <Widget>[];
-    int i = 0;
-    int r = 0;
     if (snap?.isEmpty ?? true) {
       snap = listDefault();
     }
-    while (r < 5) {
-      i++;
+    for (int i = 0; i < snap.length; i++) {
       if (snap[i]['category'] == cat && snap[i]['name'] != "NULL") {
-        r++;
+        if (arr.length == 5) {
+          return arr;
+        }
         arr.add(Product(
             productID: int.parse(snap[i]['itemid']),
             name: snap[i]['name'],
@@ -278,7 +277,7 @@ class _HomeState extends State<Home> {
       childrenCat.add(childrenProd);
     }
     return Scaffold(
-      drawer: MainDrawer(),
+        drawer: MainDrawer(),
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(206, 166, 97, 1.0),
           title: Text("Market Place"),

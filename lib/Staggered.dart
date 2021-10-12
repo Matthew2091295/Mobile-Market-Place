@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:market_place/ViewMorePage.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Staggered extends StatefulWidget {
   @override
@@ -67,24 +69,24 @@ class _StaggeredState extends State<Staggered> {
         children: <Widget>[
           captionText("Clothes", "International clothes"),
           myPhotoList(
-              "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-closet-organization-1583437747.png?crop=0.837xw:0.558xh;0.0847xw,0.245xh&resize=640:*"),
-
+              "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-closet-organization-1583437747.png?crop=0.837xw:0.558xh;0.0847xw,0.245xh&resize=640:*",
+              "Clothes"),
           captionText("Food", "Snacks"),
           myPhotoList(
-              "https://civileats.com/wp-content/uploads/2020/09/200917-ultra-processed-foods-big-food-conglomerates-junk-food-health-nutrition-waste-packaging-1-credit-mike-mozart.jpg"),
-
+              "https://civileats.com/wp-content/uploads/2020/09/200917-ultra-processed-foods-big-food-conglomerates-junk-food-health-nutrition-waste-packaging-1-credit-mike-mozart.jpg",
+              "Food"),
           captionText("Games", "Tv games"),
           myPhotoList(
-              "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/most-popular-video-games-of-2020-1582141293.png"),
-
+              "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/most-popular-video-games-of-2020-1582141293.png",
+              "Games"),
           captionText("Sports", "National sports"),
           myPhotoList(
-              "https://i.guim.co.uk/img/media/4ea56f78f07886eba24e4c171fe82295ddca8b83/2_0_3021_1814/master/3021.jpg?width=1200&quality=85&auto=format&fit=max&s=34c5d4ac96fc5b8e933ef307539b16b8"),
-
+              "https://i.guim.co.uk/img/media/4ea56f78f07886eba24e4c171fe82295ddca8b83/2_0_3021_1814/master/3021.jpg?width=1200&quality=85&auto=format&fit=max&s=34c5d4ac96fc5b8e933ef307539b16b8",
+              "Sports"),
           captionText("Technology", "Updated technology"),
           myPhotoList(
-              "https://www.mining-technology.com/wp-content/uploads/sites/8/2021/03/shutterstock_1837865569-900x506.jpg"),
-
+              "https://www.mining-technology.com/wp-content/uploads/sites/8/2021/03/shutterstock_1837865569-900x506.jpg",
+              "Technology"),
         ],
         /*
         * myItems(Icons.web_asset_rounded, "Clothes", 0xFFFFAB00),
@@ -96,16 +98,12 @@ class _StaggeredState extends State<Staggered> {
         staggeredTiles: [
           StaggeredTile.extent(2, 90.0),
           StaggeredTile.count(2, 1),
-
           StaggeredTile.extent(2, 90.0),
           StaggeredTile.count(2, 1),
-
           StaggeredTile.extent(2, 90.0),
           StaggeredTile.count(2, 1),
-
           StaggeredTile.extent(2, 90.0),
           StaggeredTile.count(2, 1),
-
           StaggeredTile.extent(2, 90.0),
           StaggeredTile.count(2, 1),
         ],
@@ -114,14 +112,27 @@ class _StaggeredState extends State<Staggered> {
   }
 }
 
-Widget myPhotoList(String myImages) {
-  return Container(
-    decoration: BoxDecoration(
-        image: DecorationImage(
-      fit: BoxFit.fill,
-      image: NetworkImage(myImages),
-    )),
-  );
+Widget myPhotoList(String myImages, String cat) {
+  return Builder(builder: (context) {
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => ViewMore(cat: cat)));
+        },
+        child: CachedNetworkImage(
+          imageUrl: myImages,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              fit: BoxFit.fill,
+              image: imageProvider,
+            )),
+          ),
+          errorWidget: (context, url, error) => Image.asset("4.jpg"),
+        ));
+  });
 }
 
 Widget captionText(String titleText, String subText) {
