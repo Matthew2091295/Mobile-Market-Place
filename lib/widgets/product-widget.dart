@@ -112,8 +112,6 @@ class Product extends StatelessWidget {
                       bool exists =
                           context.read(quantityProvider).exists(productID);
 
-                      String one = "1";
-
                       if (exists) {
                         double quantity = context
                             .read(quantityProvider)
@@ -128,7 +126,6 @@ class Product extends StatelessWidget {
                         changeCart(productID, quantity.toString());
                       } else {
                         addToCart(productID);
-                        changeCart(productID, one);
                         context
                             .read(cartProvider)
                             .addToCart(productID, this.price.toDouble());
