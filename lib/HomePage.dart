@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:market_place/Categories.dart';
 import 'package:market_place/Drawer.dart';
@@ -16,53 +15,54 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _children = [Home(), Categories(), Lists(), Cart()];
 
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        drawer: MainDrawer(),
-        body: _children[_currentIndex],
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: SafeArea(
+        child: Scaffold(
+          drawer: MainDrawer(),
+          body: _children[_currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            fixedColor: Colors.white,
+            currentIndex: _currentIndex,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Color.fromRGBO(206, 166, 97, 1.0),
+            //iconSize: 30,
+            //selectedFontSize: 15,
 
-        bottomNavigationBar: BottomNavigationBar(
-          fixedColor: Colors.white,
-          currentIndex: _currentIndex,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromRGBO(206, 166, 97, 1.0),
-          //iconSize: 30,
-          //selectedFontSize: 15,
-
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              // ignore: deprecated_member_use
-              title: Text("Home"),
-              backgroundColor: Colors.red,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.category),
-              // ignore: deprecated_member_use
-              title: Text("Categories"),
-              backgroundColor: Colors.grey,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history_toggle_off_outlined),
-              // ignore: deprecated_member_use
-              title: Text("Deals"),
-              backgroundColor: Colors.yellow,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              // ignore: deprecated_member_use
-              title: Text("Cart"),
-              backgroundColor: Colors.pink,
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                // ignore: deprecated_member_use
+                title: Text("Home"),
+                backgroundColor: Colors.red,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.category),
+                // ignore: deprecated_member_use
+                title: Text("Categories"),
+                backgroundColor: Colors.grey,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.history_toggle_off_outlined),
+                // ignore: deprecated_member_use
+                title: Text("Deals"),
+                backgroundColor: Colors.yellow,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart),
+                // ignore: deprecated_member_use
+                title: Text("Cart"),
+                backgroundColor: Colors.pink,
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
         ),
       ),
     );
