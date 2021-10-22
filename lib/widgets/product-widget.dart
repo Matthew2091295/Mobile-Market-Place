@@ -145,7 +145,6 @@ class Product extends StatelessWidget {
                       double total = context.read(totalProvider).total;
                       double count = context.read(countProvider).count;
 
-                      changeCart(productID, quantity.toString());
                       changeTotalAndCount(total, count);
                     },
                     child: Text("Add to cart"))
