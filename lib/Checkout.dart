@@ -255,6 +255,12 @@ class _CheckoutState extends State<Checkout> {
 
                           context.read(walletProvider).removeFromWallet(total);
                           context.read(totalProvider).removeFromTotal(total);
+                          
+                          streetAddressController.text = "";
+                          suburbController.text = "";
+                          cityController.text = "";
+                          provinceController.text = "";
+                          postCodeController.text = "";
 
                           var submitOrderDialog = AlertDialogSubmitOrder();
                           showDialog(
