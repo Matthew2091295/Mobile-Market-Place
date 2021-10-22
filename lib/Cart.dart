@@ -96,9 +96,6 @@ class _CartState extends State<Cart> {
             final _cart = watch(cartProvider).cart;
             final _price = watch(cartProvider).price;
 
-            print("YESHUA MELECH!!!");
-            print(_cart);
-
             return ListView.builder(
               itemCount: _cart.length,
               itemBuilder: (BuildContext context, int index) => Dismissible(
