@@ -115,16 +115,6 @@ class _CartItem extends State<CartItem> {
             newPriceDouble = productPrice * spinnerValue;
             newPrice = currencyFormat.format(newPriceDouble);
 
-            if (first) {
-              double quantity = snapshot.data[1]["quantity"].toDouble();
-              spinnerValue = quantity;
-
-              first = false;
-            } else {
-              spinnerValue =
-                  context.read(quantityProvider).getQuantity(productID);
-            }
-
             return Container(
               height: iconHeight * 1.12,
               width: double.infinity,
@@ -206,82 +196,91 @@ class _CartItem extends State<CartItem> {
                                                         ),
                                                       ),
                                                     ),
-                                                    SpinnerInput(
-                                                      spinnerValue:
-                                                          spinnerValue,
-                                                      minValue: 1,
-                                                      maxValue: 100,
-                                                      step: 1,
-                                                      disabledLongPress: true,
-                                                      disabledPopup: true,
-                                                      plusButton:
-                                                          SpinnerButtonStyle(
-                                                              color:
-                                                                  darkYellow),
-                                                      minusButton:
-                                                          SpinnerButtonStyle(
-                                                              color:
-                                                                  darkYellow),
-                                                      onChange: (newValue) {
-                                                        setState(() {
-                                                          oldSpinnerValue =
-                                                              spinnerValue;
-                                                          spinnerValue =
-                                                              newValue;
+                                                    Consumer(builder: (context,
+                                                        watch, child) {
+                                                      double spinnerValue = watch(
+                                                              quantityProvider)
+                                                          .getQuantity(
+                                                              productID);
 
-                                                          changeCart(
-                                                              productID,
-                                                              newValue
-                                                                  .toString());
+                                                      return SpinnerInput(
+                                                        spinnerValue:
+                                                            spinnerValue,
+                                                        minValue: 1,
+                                                        maxValue: 100,
+                                                        step: 1,
+                                                        disabledLongPress: true,
+                                                        disabledPopup: true,
+                                                        plusButton:
+                                                            SpinnerButtonStyle(
+                                                                color:
+                                                                    darkYellow),
+                                                        minusButton:
+                                                            SpinnerButtonStyle(
+                                                                color:
+                                                                    darkYellow),
+                                                        onChange: (newValue) {
+                                                          setState(() {
+                                                            oldSpinnerValue =
+                                                                spinnerValue;
+                                                            spinnerValue =
+                                                                newValue;
 
-                                                          if (oldSpinnerValue >
-                                                              spinnerValue) {
+                                                            changeCart(
+                                                                productID,
+                                                                newValue
+                                                                    .toString());
+
+                                                            if (oldSpinnerValue >
+                                                                spinnerValue) {
+                                                              context
+                                                                  .read(
+                                                                      totalProvider)
+                                                                  .removeFromTotal(
+                                                                      productPrice);
+
+                                                              context
+                                                                  .read(
+                                                                      countProvider)
+                                                                  .removeFromCount(
+                                                                      1);
+                                                            } else {
+                                                              context
+                                                                  .read(
+                                                                      totalProvider)
+                                                                  .addToTotal(
+                                                                      productPrice);
+
+                                                              context
+                                                                  .read(
+                                                                      countProvider)
+                                                                  .addToCount(
+                                                                      1);
+                                                            }
+
                                                             context
+                                                                .read(
+                                                                    quantityProvider)
+                                                                .changeQuantity(
+                                                                    productID,
+                                                                    spinnerValue);
+
+                                                            double _total = context
                                                                 .read(
                                                                     totalProvider)
-                                                                .removeFromTotal(
-                                                                    productPrice);
+                                                                .total;
 
-                                                            context
+                                                            double _count = context
                                                                 .read(
                                                                     countProvider)
-                                                                .removeFromCount(
-                                                                    1);
-                                                          } else {
-                                                            context
-                                                                .read(
-                                                                    totalProvider)
-                                                                .addToTotal(
-                                                                    productPrice);
+                                                                .count;
 
-                                                            context
-                                                                .read(
-                                                                    countProvider)
-                                                                .addToCount(1);
-                                                          }
-
-                                                          context
-                                                              .read(
-                                                                  quantityProvider)
-                                                              .changeQuantity(
-                                                                  productID,
-                                                                  spinnerValue);
-
-                                                          double _total = context
-                                                              .read(
-                                                                  totalProvider)
-                                                              .total;
-
-                                                          double _count = context
-                                                              .read(
-                                                                  countProvider)
-                                                              .count;
-
-                                                          changeTotalAndCount(
-                                                              _total, _count);
-                                                        });
-                                                      },
-                                                    )
+                                                            changeTotalAndCount(
+                                                                _total, _count);
+                                                          });
+                                                        },
+                                                      );
+                                                    })
                                                   ],
                                                 ),
                                               ),
