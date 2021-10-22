@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:market_place/HomePage.dart';
@@ -67,6 +69,31 @@ class _LoginState extends State<Login> {
     context.read(walletProvider).setWallet(double.tryParse(wallet));
     context.read(totalProvider).setTotal(double.tryParse(total));
     context.read(countProvider).setCount(double.tryParse(count));
+  }
+
+  getCart() async {
+    String url = Globals.url + "getCart.php";
+
+    Map<String, String> parameters = {
+      'username': Globals.username,
+    };
+    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+
+    String query = Uri(queryParameters: parameters).query;
+    var requestUrl = url + '?' + query;
+    var response = await http.get(Uri.parse(requestUrl), headers: headers);
+    var responseBody = json.decode(response.body);
+
+    if (responseBody.length > 0) {
+      for (int index = 0; index < responseBody.length; index++) {
+        int productID = responseBody[index]['itemid'];
+        double quantity = responseBody[index]['quantity'].toDouble();
+        double price = responseBody[index]['price'].toDouble();
+
+        context.read(cartProvider).addToCart(productID, price);
+        context.read(quantityProvider).changeQuantity(productID, quantity);
+      }
+    }
   }
 
   @override
@@ -146,6 +173,7 @@ class _LoginState extends State<Login> {
                                     if (checkDetails(
                                         snap, username.text, password.text)) {
                                       Globals.username = username.text;
+                                      getCart();
                                       updateUserGlobals(snap, username.text);
                                       username.text = "";
                                       password.text = "";
