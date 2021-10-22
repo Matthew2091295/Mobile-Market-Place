@@ -96,6 +96,9 @@ class _CartState extends State<Cart> {
             final _cart = watch(cartProvider).cart;
             final _price = watch(cartProvider).price;
 
+            print("YESHUA MELECH!!!");
+            print(_cart);
+
             return ListView.builder(
               itemCount: _cart.length,
               itemBuilder: (BuildContext context, int index) => Dismissible(
@@ -119,6 +122,7 @@ class _CartState extends State<Cart> {
                     context.read(totalProvider).removeFromTotal(price);
                     context.read(countProvider).removeFromCount(quantity);
                     context.read(cartProvider).removeFromCart(productID);
+                    context.read(quantityProvider).removeQuantity(productID);
                   },
                   child: new CartItem(productID: _cart[index])),
             );
