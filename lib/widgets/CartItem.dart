@@ -44,8 +44,6 @@ class _CartItem extends State<CartItem> {
   String productName;
   double productPrice;
 
-  bool first = true;
-
   getProduct(int productID) async {
     String url = Globals.url + "getItem.php";
 
@@ -112,10 +110,7 @@ class _CartItem extends State<CartItem> {
             productName = snapshot.data[0]["name"].trim();
             productPrice = snapshot.data[0]["price"].toDouble();
 
-            if (first) {
-              quantity = snapshot.data[1]["quantity"].toDouble();
-              first = false;
-            }
+            quantity = context.read(quantityProvider).getQuantity(productID);
 
             newPriceDouble = productPrice * quantity;
             newPrice = currencyFormat.format(newPriceDouble);
@@ -230,9 +225,6 @@ class _CartItem extends State<CartItem> {
                                                                 spinnerValue;
                                                             spinnerValue =
                                                                 newValue;
-
-                                                            quantity =
-                                                                spinnerValue;
 
                                                             changeCart(
                                                                 productID,
