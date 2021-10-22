@@ -37,7 +37,7 @@ class _CartItem extends State<CartItem> {
   _CartItem(this.productID);
   final int productID;
 
-  double spinnerValue = 1;
+  double quantity = 1;
   double oldSpinnerValue = 1;
 
   String productIcon;
@@ -112,7 +112,12 @@ class _CartItem extends State<CartItem> {
             productName = snapshot.data[0]["name"].trim();
             productPrice = snapshot.data[0]["price"].toDouble();
 
-            newPriceDouble = productPrice * spinnerValue;
+            if (first) {
+              quantity = snapshot.data[1]["quantity"].toDouble();
+              first = false;
+            }
+
+            newPriceDouble = productPrice * quantity;
             newPrice = currencyFormat.format(newPriceDouble);
 
             return Container(
@@ -198,10 +203,10 @@ class _CartItem extends State<CartItem> {
                                                     ),
                                                     Consumer(builder: (context,
                                                         watch, child) {
-                                                      double spinnerValue = watch(
-                                                              quantityProvider)
-                                                          .getQuantity(
-                                                              productID);
+                                                      double spinnerValue =
+                                                          watch(quantityProvider)
+                                                              .getQuantity(
+                                                                  productID);
 
                                                       return SpinnerInput(
                                                         spinnerValue:
@@ -225,6 +230,9 @@ class _CartItem extends State<CartItem> {
                                                                 spinnerValue;
                                                             spinnerValue =
                                                                 newValue;
+
+                                                            quantity =
+                                                                spinnerValue;
 
                                                             changeCart(
                                                                 productID,
