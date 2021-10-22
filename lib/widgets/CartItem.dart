@@ -122,7 +122,7 @@ class _CartItem extends State<CartItem> {
               first = false;
             } else {
               spinnerValue =
-                  context.read(quantityProvider).getCartQuantity(productID);
+                  context.read(quantityProvider).getQuantity(productID);
             }
 
             return Container(
@@ -245,7 +245,8 @@ class _CartItem extends State<CartItem> {
                                                             context
                                                                 .read(
                                                                     countProvider)
-                                                                .decrementCount();
+                                                                .removeFromCount(
+                                                                    1);
                                                           } else {
                                                             context
                                                                 .read(
@@ -256,16 +257,15 @@ class _CartItem extends State<CartItem> {
                                                             context
                                                                 .read(
                                                                     countProvider)
-                                                                .incrementCount();
+                                                                .addToCount(1);
                                                           }
 
                                                           context
                                                               .read(
                                                                   quantityProvider)
-                                                              .changeCart(
+                                                              .changeQuantity(
                                                                   productID,
-                                                                  spinnerValue,
-                                                                  productPrice);
+                                                                  spinnerValue);
 
                                                           double _total = context
                                                               .read(
