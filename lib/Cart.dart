@@ -82,159 +82,128 @@ class _CartState extends State<Cart> {
     double contextHeight = MediaQuery.of(context).size.height;
     double iconHeight = contextHeight * 0.18;
 
-    return FutureBuilder(
-        future: getCart(), //retrieving data from database
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            List<int> _cart = [];
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Cart"),
+          backgroundColor: darkYellow,
+          automaticallyImplyLeading: false,
+        ),
+        body: Container(
+          color: Colors.white,
+          padding: EdgeInsets.only(left: padding, top: padding, right: padding),
+          child: Consumer(builder: (context, watch, child) {
+            final _cart = watch(cartProvider).cart;
+            final _price = watch(cartProvider).price;
 
-            for (int i = 0; i < snapshot.data.length; i++) {
-              _cart.add(snapshot.data[i]["itemid"]);
-            }
+            return ListView.builder(
+              itemCount: _cart.length,
+              itemBuilder: (BuildContext context, int index) => Dismissible(
+                  key: UniqueKey(),
+                  onDismissed: (direction) {
+                    int productID = _cart[index];
 
-            return SafeArea(
-              child: Scaffold(
-                appBar: AppBar(
-                  title: Text("Cart"),
-                  backgroundColor: darkYellow,
-                  automaticallyImplyLeading: false,
-                ),
-                body: Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.only(
-                      left: padding, top: padding, right: padding),
-                  child: ListView.builder(
-                    itemCount: _cart.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        Dismissible(
-                            key: UniqueKey(),
-                            onDismissed: (direction) {
-                              int productID = _cart[index];
+                    final _quantity = context.read(quantityProvider).quantity;
+                    double quantity = _quantity[productID];
+                    double price = _price[productID] * quantity;
 
-                              setState(() {});
+                    double total = context.read(totalProvider).total;
+                    total -= price;
 
-                              setState(() {
-                                _cart.remove(index);
-                              });
-                              deleteFromCart(productID);
+                    double count = context.read(countProvider).count;
+                    count -= quantity;
 
-                              double _price = context
-                                  .read(quantityProvider)
-                                  .getCartPrice(productID);
+                    deleteFromCart(productID);
+                    changeTotalAndCount(total, count);
 
-                              double _count = context
-                                  .read(quantityProvider)
-                                  .getCartQuantity(productID);
-
-                              double _total = _price * _count;
-
-                              context
-                                  .read(totalProvider)
-                                  .removeFromTotal(_count * _total);
-
-                              context.read(countProvider).deleteCount(_count);
-
-                              double total = context.read(totalProvider).total;
-                              double count = context.read(countProvider).count;
-
-                              changeTotalAndCount(total, count);
-                            },
-                            child: new CartItem(productID: _cart[index])),
-                  ),
-                ),
-                persistentFooterButtons: [
-                  Column(
-                    children: [
-                      Container(
-                        height: iconHeight / 2.65,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                RichText(
-                                  text: TextSpan(
-                                    text: "Total:",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Spacer(),
-                                Consumer(
-                                  builder: (context, watch, child) {
-                                    final _total = watch(totalProvider).total;
-                                    return Container(
-                                      child: RichText(
-                                        text: TextSpan(
-                                          text: "R" +
-                                              currencyFormat.format(_total),
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                            Consumer(builder: (context, watch, child) {
-                              final _count = watch(countProvider).count;
-
-                              return Align(
-                                alignment: Alignment.topLeft,
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: "(" +
-                                        _count.round().toString() +
-                                        " Items)",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                      Spacer(),
-                      SizedBox(
-                        width: double.infinity,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: darkYellow,
-                            textStyle: const TextStyle(fontSize: 24),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Checkout()))
-                                .then((value) {
-                              setState(() {
-                                _cart.clear();
-                              });
-                            });
-                          },
-                          child: const Text('Checkout'),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                    context.read(totalProvider).removeFromTotal(price);
+                    context.read(countProvider).removeFromCount(quantity);
+                    context.read(cartProvider).removeFromCart(productID);
+                  },
+                  child: new CartItem(productID: _cart[index])),
             );
-          } else {
-            return new LinearProgressIndicator(
-                color: darkYellow, backgroundColor: lightGrey);
-          }
-        });
+          }),
+        ),
+        persistentFooterButtons: [
+          Column(
+            children: [
+              Container(
+                height: iconHeight / 2.65,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            text: "Total:",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        Consumer(
+                          builder: (context, watch, child) {
+                            final _total = watch(totalProvider).total;
+                            return Container(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "R" + currencyFormat.format(_total),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    Consumer(builder: (context, watch, child) {
+                      final _count = watch(countProvider).count;
+
+                      return Align(
+                        alignment: Alignment.topLeft,
+                        child: RichText(
+                          text: TextSpan(
+                            text: "(" + _count.round().toString() + " Items)",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              ),
+              Spacer(),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: darkYellow,
+                    textStyle: const TextStyle(fontSize: 24),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Checkout()),
+                    );
+                  },
+                  child: const Text('Checkout'),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
