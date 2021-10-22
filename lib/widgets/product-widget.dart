@@ -112,6 +112,8 @@ class Product extends StatelessWidget {
                       bool exists =
                           context.read(quantityProvider).exists(productID);
 
+                      String one = "1";
+
                       if (exists) {
                         double quantity = context
                             .read(quantityProvider)
@@ -122,29 +124,29 @@ class Product extends StatelessWidget {
                         context
                             .read(quantityProvider)
                             .changeQuantity(productID, quantity);
-                        context
-                            .read(totalProvider)
-                            .addToTotal(this.price.toDouble());
-                        context.read(countProvider).addToCount(1);
-
-                        double total = context.read(totalProvider).total;
-                        double count = context.read(countProvider).count;
 
                         changeCart(productID, quantity.toString());
-                        changeTotalAndCount(total, count);
                       } else {
                         addToCart(productID);
+                        changeCart(productID, one);
                         context
                             .read(cartProvider)
                             .addToCart(productID, this.price.toDouble());
                         context
                             .read(quantityProvider)
                             .changeQuantity(productID, 1);
-                        context
-                            .read(totalProvider)
-                            .addToTotal(this.price.toDouble());
-                        context.read(countProvider).addToCount(1);
                       }
+
+                      context
+                          .read(totalProvider)
+                          .addToTotal(this.price.toDouble());
+                      context.read(countProvider).addToCount(1);
+
+                      double total = context.read(totalProvider).total;
+                      double count = context.read(countProvider).count;
+
+                      changeCart(productID, quantity.toString());
+                      changeTotalAndCount(total, count);
                     },
                     child: Text("Add to cart"))
               ],
