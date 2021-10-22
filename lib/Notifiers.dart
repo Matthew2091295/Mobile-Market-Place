@@ -78,7 +78,7 @@ class CartNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeCart(int productID, double price){
+  void changeCart(int productID, double price) {
     _price[productID] = price;
     notifyListeners();
   }
@@ -99,6 +99,10 @@ class CartNotifier extends ChangeNotifier {
 class QuantityNotifier extends ChangeNotifier {
   var _quantity = <int, double>{};
   get quantity => _quantity;
+
+  bool exists(int productID) {
+    return _quantity.containsKey(productID);
+  }
 
   getQuantity(int productID) {
     return _quantity[productID];
