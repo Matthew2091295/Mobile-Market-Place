@@ -81,8 +81,15 @@ class Product extends StatelessWidget {
                     onPressed: () {
                       addToCart(productID);
                       context
+                          .read(cartProvider)
+                          .addToCart(productID, this.price.toDouble());
+                      context
+                          .read(quantityProvider)
+                          .changeQuantity(productID, 1);
+                      context
                           .read(totalProvider)
                           .addToTotal(this.price.toDouble());
+                      context.read(countProvider).addToCount(1);
                     },
                     child: Text("Add to cart"))
               ],
