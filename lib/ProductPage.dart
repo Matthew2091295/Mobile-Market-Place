@@ -1,6 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:market_place/Drawer.dart';
 import 'package:market_place/widgets/widgets.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:market_place/Providers.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:market_place/Globals.dart' as Globals;
 
 class ProductPage extends StatelessWidget {
   const ProductPage(
@@ -17,6 +25,20 @@ class ProductPage extends StatelessWidget {
   final double price;
   final int quantity;
   final int productID;
+
+  addToCart(int productID) async {
+    String url = Globals.url + "addToCart.php";
+
+    Map<String, String> parameters = {
+      'itemID': productID.toString(),
+      'username': Globals.username,
+    };
+    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+
+    String query = Uri(queryParameters: parameters).query;
+    var requestUrl = url + '?' + query;
+    await http.get(Uri.parse(requestUrl), headers: headers);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +160,19 @@ class ProductPage extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: ElevatedButton(
                       child: Text("Add to cart"),
-                      onPressed: () {},
+                      onPressed: () {
+                        addToCart(productID);
+                        context
+                            .read(cartProvider)
+                            .addToCart(productID, this.price.toDouble());
+                        context
+                            .read(quantityProvider)
+                            .changeQuantity(productID, 1);
+                        context
+                            .read(totalProvider)
+                            .addToTotal(this.price.toDouble());
+                        context.read(countProvider).addToCount(1);
+                      },
                     ),
                   )),
             )
