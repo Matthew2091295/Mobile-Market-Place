@@ -40,32 +40,6 @@ class WalletNotifier extends ChangeNotifier {
   }
 }
 
-class QuantityNotifier extends ChangeNotifier {
-  var _cart = <int, double>{};
-  var _price = <int, double>{};
-
-  get cart => _cart;
-  get price => _price;
-
-  getCartQuantity(int productID) {
-    return _cart[productID];
-  }
-
-  getCartPrice(int productID) {
-    return _price[productID];
-  }
-
-  void changeCart(int productID, double quantity, double price) {
-    _cart[productID] = quantity;
-    _price[productID] = price;
-    notifyListeners();
-  }
-
-  void deleteCart(int productID) {
-    _cart.remove(productID);
-  }
-}
-
 class CountNotifier extends ChangeNotifier {
   double _count = 0;
   double get count => _count;
@@ -75,24 +49,73 @@ class CountNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void incrementCount() {
-    _count++;
+  void clearCount() {
+    _count = 0;
     notifyListeners();
   }
 
-  void decrementCount() {
-    _count--;
+  void addToCount(double count) {
+    _count += count;
     notifyListeners();
   }
 
-  
-  void deleteCount(double count) {
+  void removeFromCount(double count) {
     _count -= count;
     notifyListeners();
   }
+}
 
-  void clearCount() {
-    _count = 0;
+class CartNotifier extends ChangeNotifier {
+  var _cart = [];
+  var _price = <int, double>{};
+
+  get cart => _cart;
+  get price => _price;
+
+  void addToCart(int productID, double price) {
+    _cart.add(productID);
+    _price[productID] = price;
+    notifyListeners();
+  }
+
+  void changeCart(int productID, double price){
+    _price[productID] = price;
+    notifyListeners();
+  }
+
+  void removeFromCart(int productID) {
+    _cart.remove(productID);
+    _price.remove(productID);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _cart.clear();
+    _price.clear();
+    notifyListeners();
+  }
+}
+
+class QuantityNotifier extends ChangeNotifier {
+  var _quantity = <int, double>{};
+  get quantity => _quantity;
+
+  getQuantity(int productID) {
+    return _quantity[productID];
+  }
+
+  void changeQuantity(int productID, double quantity) {
+    _quantity[productID] = quantity;
+    notifyListeners();
+  }
+
+  void removeQuantity(int productID) {
+    _quantity.remove(productID);
+    notifyListeners();
+  }
+
+  void clearQuantities() {
+    _quantity.clear();
     notifyListeners();
   }
 }
