@@ -249,17 +249,16 @@ class _CheckoutState extends State<Checkout> {
                           removeFromWallet(total);
                           changeTotalAndCount(0, 0);
 
+                          context.read(cartProvider).clearCart();
                           context.read(walletProvider).removeFromWallet(total);
                           context.read(totalProvider).removeFromTotal(total);
                           context.read(countProvider).clearCount();
 
                           var submitOrderDialog = AlertDialogSubmitOrder();
-                          await showDialog(
+                          showDialog(
                               context: context,
                               builder: (BuildContext context) =>
                                   submitOrderDialog);
-
-                          Navigator.pop(context);
                         }
                       } else {
                         var emptyFieldsDialog = AlertDialogEmptyFields();
