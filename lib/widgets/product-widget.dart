@@ -40,6 +40,36 @@ class Product extends StatelessWidget {
     await http.get(Uri.parse(requestUrl), headers: headers);
   }
 
+  changeCart(int productID, String newValue) async {
+    String url = Globals.url + "changeCart.php";
+    Map<String, String> parameters = {
+      'itemID': productID.toString(),
+      'username': Globals.username,
+      'quantity': newValue,
+    };
+
+    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+
+    String query = Uri(queryParameters: parameters).query;
+    var requestUrl = url + '?' + query;
+    await http.get(Uri.parse(requestUrl), headers: headers);
+  }
+
+  changeTotalAndCount(double total, double count) async {
+    String url = Globals.url + "changeTotalAndCount.php";
+
+    Map<String, String> parameters = {
+      'username': Globals.username,
+      'total': total.toString(),
+      'item_count': count.toString(),
+    };
+    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+
+    String query = Uri(queryParameters: parameters).query;
+    var requestUrl = url + '?' + query;
+    await http.get(Uri.parse(requestUrl), headers: headers);
+  }
+
   @override
   Widget build(BuildContext context) {
     String path = "assets/images/" + this.productID.toString() + ".jpg";
@@ -79,17 +109,42 @@ class Product extends StatelessWidget {
                 Text("Quantity: " + this.quantity.toString()),
                 ElevatedButton(
                     onPressed: () {
-                      addToCart(productID);
-                      context
-                          .read(cartProvider)
-                          .addToCart(productID, this.price.toDouble());
-                      context
-                          .read(quantityProvider)
-                          .changeQuantity(productID, 1);
-                      context
-                          .read(totalProvider)
-                          .addToTotal(this.price.toDouble());
-                      context.read(countProvider).addToCount(1);
+                      bool exists =
+                          context.read(quantityProvider).exists(productID);
+
+                      if (exists) {
+                        double quantity = context
+                            .read(quantityProvider)
+                            .getQuantity(productID);
+
+                        quantity++;
+
+                        context
+                            .read(quantityProvider)
+                            .changeQuantity(productID, quantity);
+                        context
+                            .read(totalProvider)
+                            .addToTotal(this.price.toDouble());
+                        context.read(countProvider).addToCount(1);
+
+                        double total = context.read(totalProvider).total;
+                        double count = context.read(countProvider).count;
+
+                        changeCart(productID, quantity.toString());
+                        changeTotalAndCount(total, count);
+                      } else {
+                        addToCart(productID);
+                        context
+                            .read(cartProvider)
+                            .addToCart(productID, this.price.toDouble());
+                        context
+                            .read(quantityProvider)
+                            .changeQuantity(productID, 1);
+                        context
+                            .read(totalProvider)
+                            .addToTotal(this.price.toDouble());
+                        context.read(countProvider).addToCount(1);
+                      }
                     },
                     child: Text("Add to cart"))
               ],
