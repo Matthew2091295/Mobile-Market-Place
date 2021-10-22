@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:market_place/Login.dart';
 import 'package:market_place/UserPage.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:market_place/Providers.dart';
+
 import 'Globals.dart' as Globals;
 
 class MainDrawer extends StatelessWidget {
@@ -86,6 +89,9 @@ class MainDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 18.0),
             ),
             onTap: () {
+              context.read(cartProvider).clearCart();
+              context.read(countProvider).clearCount();
+              context.read(quantityProvider).clearQuantities();
               Navigator.push(
                   context,
                   MaterialPageRoute(
