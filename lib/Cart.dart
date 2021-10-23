@@ -1,16 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:market_place/Checkout.dart';
-import 'package:market_place/Globals.dart' as Globals;
 import 'package:market_place/Providers.dart';
 import 'package:market_place/widgets/CartItem.dart';
+
+import 'package:market_place/HTTP.dart' as HTTP;
 
 final double padding = 8.0;
 
@@ -32,51 +29,6 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  getCart() async {
-    String url = Globals.url + "getCart.php";
-
-    Map<String, String> parameters = {
-      'username': Globals.username,
-    };
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    var response = await http.get(Uri.parse(requestUrl), headers: headers);
-    var responseBody = json.decode(response.body);
-
-    return responseBody;
-  }
-
-  deleteFromCart(int productID) async {
-    String url = Globals.url + "deleteFromCart.php";
-
-    Map<String, String> parameters = {
-      'itemID': productID.toString(),
-      'username': Globals.username,
-    };
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    await http.get(Uri.parse(requestUrl), headers: headers);
-  }
-
-  changeTotalAndCount(double total, double count) async {
-    String url = Globals.url + "changeTotalAndCount.php";
-
-    Map<String, String> parameters = {
-      'username': Globals.username,
-      'total': total.toString(),
-      'item_count': count.toString(),
-    };
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    await http.get(Uri.parse(requestUrl), headers: headers);
-  }
-
   @override
   Widget build(BuildContext context) {
     double contextHeight = MediaQuery.of(context).size.height;
@@ -113,8 +65,8 @@ class _CartState extends State<Cart> {
                     double count = context.read(countProvider).count;
                     count -= quantity;
 
-                    deleteFromCart(productID);
-                    changeTotalAndCount(total, count);
+                    HTTP.deleteFromCart(productID);
+                    HTTP.changeTotalAndCount(total, count);
 
                     context.read(totalProvider).removeFromTotal(price);
                     context.read(countProvider).removeFromCount(quantity);
