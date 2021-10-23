@@ -4,6 +4,7 @@ import 'package:market_place/Drawer.dart';
 import 'package:market_place/Home.dart';
 import 'package:market_place/Lists.dart';
 import 'package:market_place/Cart.dart';
+import 'package:market_place/OrderHistory.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
-  final List<Widget> _children = [Home(), Categories(), Lists(), Cart()];
+  final List<Widget> _children = [Home(), Categories(), OrderHistory(), Cart()];
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.history_toggle_off_outlined),
                 // ignore: deprecated_member_use
-                title: Text("Deals"),
+                title: Text("Order History"),
                 backgroundColor: Colors.yellow,
               ),
               BottomNavigationBarItem(
