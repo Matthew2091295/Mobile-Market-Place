@@ -7,7 +7,7 @@ import 'package:market_place/Checkout.dart';
 import 'package:market_place/Providers.dart';
 import 'package:market_place/widgets/CartItem.dart';
 
-import 'package:market_place/HTTP.dart' as HTTP;
+import 'package:market_place/HTTP.dart';
 
 final double padding = 8.0;
 
@@ -65,8 +65,8 @@ class _CartState extends State<Cart> {
                     double count = context.read(countProvider).count;
                     count -= quantity;
 
-                    HTTP.deleteFromCart(productID);
-                    HTTP.changeTotalAndCount(total, count);
+                    DeleteFromCart().deleteFromCart(productID);
+                    ChangeTotalAndCount().changeTotalAndCount(total, count);
 
                     context.read(totalProvider).removeFromTotal(price);
                     context.read(countProvider).removeFromCount(quantity);
