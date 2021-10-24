@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:market_place/ProductPage.dart';
-import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:market_place/Providers.dart';
 
-import 'package:http/http.dart' as http;
-import 'package:market_place/Globals.dart' as Globals;
+import 'package:market_place/HTTP.dart';
 
 class Product extends StatelessWidget {
   const Product(
@@ -25,50 +23,6 @@ class Product extends StatelessWidget {
   final double price;
   final String description;
   final String image;
-
-  addToCart(int productID) async {
-    String url = Globals.url + "addToCart.php";
-
-    Map<String, String> parameters = {
-      'itemID': productID.toString(),
-      'username': Globals.username,
-    };
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    await http.get(Uri.parse(requestUrl), headers: headers);
-  }
-
-  changeCart(int productID, String newValue) async {
-    String url = Globals.url + "changeCart.php";
-    Map<String, String> parameters = {
-      'itemID': productID.toString(),
-      'username': Globals.username,
-      'quantity': newValue,
-    };
-
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    await http.get(Uri.parse(requestUrl), headers: headers);
-  }
-
-  changeTotalAndCount(double total, double count) async {
-    String url = Globals.url + "changeTotalAndCount.php";
-
-    Map<String, String> parameters = {
-      'username': Globals.username,
-      'total': total.toString(),
-      'item_count': count.toString(),
-    };
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    await http.get(Uri.parse(requestUrl), headers: headers);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +77,9 @@ class Product extends StatelessWidget {
                             .read(quantityProvider)
                             .changeQuantity(productID, quantity);
 
-                        changeCart(productID, quantity.toString());
+                        ChangeCart().changeCart(productID, quantity);
                       } else {
-                        addToCart(productID);
+                        AddToCart().addToCart(productID);
                         context
                             .read(cartProvider)
                             .addToCart(productID, this.price.toDouble());
@@ -142,7 +96,7 @@ class Product extends StatelessWidget {
                       double total = context.read(totalProvider).total;
                       double count = context.read(countProvider).count;
 
-                      changeTotalAndCount(total, count);
+                      ChangeTotalAndCount().changeTotalAndCount(total, count);
                     },
                     child: Text("Add to cart"))
               ],
