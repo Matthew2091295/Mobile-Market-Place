@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:market_place/Providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:http/http.dart' as http;
-import 'package:market_place/Globals.dart' as Globals;
+import 'package:market_place/HTTP.dart';
 
 final double padding = 8.0;
 
@@ -28,48 +25,6 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
-  deleteCart() async {
-    String url = Globals.url + "deleteCart.php";
-
-    Map<String, String> parameters = {
-      'username': Globals.username,
-    };
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    await http.get(Uri.parse(requestUrl), headers: headers);
-  }
-
-  changeTotalAndCount(double total, double count) async {
-    String url = Globals.url + "changeTotalAndCount.php";
-
-    Map<String, String> parameters = {
-      'username': Globals.username,
-      'total': total.toString(),
-      'item_count': count.toString(),
-    };
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    await http.get(Uri.parse(requestUrl), headers: headers);
-  }
-
-  removeFromWallet(double wallet) async {
-    String url = Globals.url + "removeFromWallet.php";
-
-    Map<String, String> parameters = {
-      'username': Globals.username,
-      'wallet': wallet.toString(),
-    };
-    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-
-    String query = Uri(queryParameters: parameters).query;
-    var requestUrl = url + '?' + query;
-    await http.get(Uri.parse(requestUrl), headers: headers);
-  }
-
   final TextEditingController streetAddressController = TextEditingController();
   final TextEditingController suburbController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
@@ -245,17 +200,17 @@ class _CheckoutState extends State<Checkout> {
                               builder: (BuildContext context) =>
                                   insufficientFundsDialog);
                         } else {
-                          deleteCart();
-                          removeFromWallet(total);
-                          changeTotalAndCount(0, 0);
+                          DeleteCart().deleteCart();
+                          RemoveFromWallet().removeFromWallet(total);
+                          ChangeTotalAndCount().changeTotalAndCount(0, 0);
 
-                          context.read(cartProvider).clearCart();                          
+                          context.read(cartProvider).clearCart();
                           context.read(countProvider).clearCount();
                           context.read(quantityProvider).clearQuantities();
 
                           context.read(walletProvider).removeFromWallet(total);
                           context.read(totalProvider).removeFromTotal(total);
-                          
+
                           streetAddressController.text = "";
                           suburbController.text = "";
                           cityController.text = "";
