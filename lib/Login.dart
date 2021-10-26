@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
   }
 
   checkDetails(List snap, String username, String password) {
-    //Loops thorugh snap (JSON String) and checks if the details are correct
+    //Loops through snap (JSON String) and checks if the details are correct
     for (int i = 0; i < snap.length; i++) {
       if (snap[i]['username'] == username && snap[i]['password'] == password) {
         return true;
