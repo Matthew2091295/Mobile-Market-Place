@@ -12,14 +12,20 @@ void main() {
             home: new Product(
           name: "Name",
           price: 10,
-          description: "",
+          description: "A description",
           quantity: 15,
-          productID: 1,
+          productID: 4,
         )));
     await tester.pumpWidget(testWidget);
 
     expect(find.text("Name"), findsOneWidget);
     expect(find.text("R10.00"), findsOneWidget);
     expect(find.text("Quantity: 15"), findsOneWidget);
+    expect(find.byType(Image), findsOneWidget);
+    expect(find.text("Add to cart"), findsOneWidget);
+
+    await tester.tap(find.byType(Image));
+
+    expect(find.text("Name"), findsOneWidget);
   });
 }
