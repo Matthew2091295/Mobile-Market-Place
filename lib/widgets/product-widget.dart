@@ -88,6 +88,24 @@ class Product extends StatelessWidget {
                             .changeQuantity(productID, 1);
                       }
 
+                      showDialog(
+                        // display dialog "product added!"
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            content: new Text("Product added!"),
+                            actions: <Widget>[
+                              new FlatButton(
+                                child: new Text("OK"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+
                       context
                           .read(totalProvider)
                           .addToTotal(this.price.toDouble());

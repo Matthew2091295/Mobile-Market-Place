@@ -310,7 +310,8 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () { // view more button
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(

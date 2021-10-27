@@ -66,6 +66,25 @@ class _CartState extends State<Cart> {
                     count -= quantity;
 
                     DeleteFromCart().deleteFromCart(productID);
+
+                    showDialog(
+                      // display dialog "product added!"
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: new Text("Product deleted!"),
+                          actions: <Widget>[
+                            new FlatButton(
+                              child: new Text("OK"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+
                     ChangeTotalAndCount().changeTotalAndCount(total, count);
 
                     context.read(totalProvider).removeFromTotal(price);
