@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:market_place/Categories.dart';
 import 'package:market_place/Drawer.dart';
 import 'package:market_place/Home.dart';
-import 'package:market_place/Lists.dart';
 import 'package:market_place/Cart.dart';
 import 'package:market_place/OrderHistory.dart';
+import 'package:market_place/Staggered.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
-  final List<Widget> _children = [Home(), Categories(), OrderHistory(), Cart()];
+  final List<Widget> _children = [Home(), Staggered(), OrderHistory(), Cart()];
 
   @override
   Widget build(BuildContext context) {
