@@ -204,6 +204,23 @@ class _CheckoutState extends State<Checkout> {
                           RemoveFromWallet().removeFromWallet(total);
                           ChangeTotalAndCount().changeTotalAndCount(0, 0);
 
+                          String address = streetAddressController.text +
+                              ";" +
+                              suburbController.text +
+                              ";" +
+                              cityController.text +
+                              ";" +
+                              provinceController.text +
+                              ";" +
+                              postCodeController.text;
+
+                          var _cart = context.read(cartProvider).cart;
+                          var _quantity =
+                              context.read(quantityProvider).quantity;
+
+                          AddToOrderHistory()
+                              .addToOrderHistory(address, _cart, _quantity);
+
                           context.read(cartProvider).clearCart();
                           context.read(countProvider).clearCount();
                           context.read(quantityProvider).clearQuantities();
