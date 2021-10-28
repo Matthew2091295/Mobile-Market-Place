@@ -143,3 +143,29 @@ class RemoveFromWallet {
     await http.get(Uri.parse(requestUrl), headers: headers);
   }
 }
+
+class AddToOrderHistory {
+  addToOrderHistory(String address, var cart, var quantities) async {
+    String url = Globals.url + "addToOrderHistory.php";
+
+    Map<String, String> parameters = {
+      'username': Globals.username,
+      'address': address,
+    };
+
+    for (int index = 0; index < cart.length; index++) {
+      int productID = cart[index];
+      int quantity = quantities[productID].toInt();
+
+      parameters['cart[' + index.toString() + '][0]'] = productID.toString();
+      parameters['cart[' + index.toString() + '][1]'] = quantity.toString();
+    }
+
+    var headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+
+    String query = Uri(queryParameters: parameters).query;
+    var requestUrl = url + '?' + query;
+    await http.get(Uri.parse(requestUrl), headers: headers);
+  }
+}
+
