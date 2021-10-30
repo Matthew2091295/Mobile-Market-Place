@@ -36,6 +36,10 @@ dependencies:
   intl: ^0.17.0
   flutter_riverpod: ^0.14.0+3
   cached_network_image: ^3.1.0
+  open_file:
+  path_provider:
+  syncfusion_flutter_pdf: ^18.4.47-beta
+  universal_html: ^1.2.4  
 
 dev_dependencies:
   flutter_test:

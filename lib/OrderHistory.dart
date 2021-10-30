@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:market_place/Login.dart';
+import 'package:market_place/OrderScreen.dart';
 import 'package:market_place/pallete.dart';
 import 'package:market_place/widgets/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +20,13 @@ class OrderHistory extends StatefulWidget {
 
 getMethod() async {
   String theUrl =
-      "https://lamp.ms.wits.ac.za/home/s1854457/getItems.php"; //connecting to Wits database
+      "https://lamp.ms.wits.ac.za/home/s1854457/getOrder.php?user=" +
+          Globals.username; //connecting to Wits database
+
+  Map<String, String> params = {
+    "Accept": "application/json",
+    "user": Globals.username
+  };
   var res = await http
       .get(Uri.parse(theUrl), headers: {"Accept": "application/json"});
   var responseBody = json.decode(res.body);
@@ -30,78 +36,29 @@ getMethod() async {
   return responseBody;
 }
 
-orderItem(productID, name, price, description, quantity) {
-  String path = "assets/images/" + productID.toString() + ".jpg";
-  return Builder(
-    builder: (context) {
-      return Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Image.asset(path, height: 100, width: 100, fit: BoxFit.scaleDown,
-                errorBuilder: (BuildContext context, Object exception,
-                    StackTrace stackTrace) {
-              return Text('Error fetching Image');
-            }),
-            Text(name),
-          ],
-        ),
-      );
-    },
-  );
-}
-
-returnOrder() {
-  //Need to get it to pull an order out of a list of order items
-  final arr = <Widget>[];
-  for (int i = 4; i < 9; i++) {
-    arr.add(orderItem(i, "Shoes", 10, "description", 10));
-  }
-  return arr;
-}
-
-listOfOrders() {
-  //Would have an orderID, uses it to pull from database and then calls return order for each
-  /*
-  psuedocode:
-  for orders in snap:
-    if order.user = userID:
-      arr.add(returnOrder(order.items))
-  */
+listOfOrders(BuildContext context, List snap) {
   final orderList = <Widget>[];
 
-  for (int i = 0; i < 5; i++) {
+  orderList.add(PDFButton());
+
+  for (int i = 0; i < snap.length; i++) {
     orderList.add(Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Container(
           height: 200,
-          child: Column(children: [
-            Text(
-              "Order Number: ",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Expanded(
-              child: ListView(
-                  scrollDirection: Axis.horizontal, children: returnOrder()),
-            ),
-            Container(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 30),
-                child: Text(
-                  "Total: R200",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+          child: Column(
+            children: [
+              Text(
+                "Order Number: " + (i + 1).toString(),
+                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-            ),
-          ])),
-    ));
-    orderList.add(Divider(
-      height: 20,
-      thickness: 5,
-      indent: 20,
-      endIndent: 20,
+              Expanded(
+                  child: OrderItem(
+                orderID: int.parse(snap[i]['order_history_id']),
+              )),
+            ],
+          )),
     ));
   }
   return orderList;
@@ -116,8 +73,16 @@ class _OrderHistoryState extends State<OrderHistory> {
           title: const Text("Order History"),
           backgroundColor: Color.fromRGBO(206, 166, 97, 1.0),
         ),
-        body: ListView(
-          children: listOfOrders(),
-        ));
+        body: FutureBuilder(
+            future: getMethod(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              List snap = snapshot.data;
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error fetching Data"),
+                );
+              }
+              return ListView(children: listOfOrders(context, snap));
+            }));
   }
 }
