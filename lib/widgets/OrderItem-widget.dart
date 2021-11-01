@@ -38,31 +38,17 @@ orderItem(productID, name, price, description, quantity) {
   String path = "assets/images/" + productID.toString() + ".jpg";
   return Builder(
     builder: (context) {
-      return GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => ProductPage(
-                        name: name,
-                        description: description,
-                        price: double.parse(price),
-                        quantity: int.parse(quantity),
-                        productID: int.parse(productID),
-                      )));
-        },
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Image.asset(path, height: 100, width: 100, fit: BoxFit.scaleDown,
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace stackTrace) {
-                return Text('Error fetching Image');
-              }),
-              Text(name),
-            ],
-          ),
+      return Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Image.asset(path, height: 100, width: 100, fit: BoxFit.scaleDown,
+                errorBuilder: (BuildContext context, Object exception,
+                    StackTrace stackTrace) {
+              return Text('Error fetching Image');
+            }),
+            Text(name),
+          ],
         ),
       );
     },

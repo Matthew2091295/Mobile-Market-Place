@@ -39,7 +39,7 @@ getMethod() async {
 listOfOrders(BuildContext context, List snap) {
   final orderList = <Widget>[];
 
-  orderList.add(PDFButton());
+  //orderList.add(PDFButton());
 
   for (int i = 0; i < snap.length; i++) {
     orderList.add(Padding(
@@ -48,15 +48,32 @@ listOfOrders(BuildContext context, List snap) {
           height: 200,
           child: Column(
             children: [
-              Text(
-                "Order Number: " + (i + 1).toString(),
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "Order Number: " + (i + 1).toString(),
+                  textAlign: TextAlign.right,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ),
               Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => OrderScreen(
+                                orderID:
+                                    int.parse(snap[i]['order_history_id']))));
+                  },
                   child: OrderItem(
-                orderID: int.parse(snap[i]['order_history_id']),
-              )),
+                    orderID: int.parse(snap[i]['order_history_id']),
+                  ),
+                ),
+              ),
+              Divider(
+                thickness: 2,
+              ),
             ],
           )),
     ));
