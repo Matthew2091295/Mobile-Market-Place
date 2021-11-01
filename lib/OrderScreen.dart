@@ -33,8 +33,18 @@ getMethod(int orderID) async {
   return responseBody;
 }
 
+createSnap() {
+  return [
+    {"quantity": "1", "price": "100", "name": "Shoes", "itemid": "4"}
+  ];
+}
+
 orderItems(List snap) {
   final orderItems = <Widget>[];
+
+  if (snap?.isEmpty ?? true) {
+    snap = createSnap();
+  }
 
   for (int i = 0; i < snap.length; i++) {
     String path = "assets/images/" + snap[i]['itemid'] + ".jpg";
@@ -57,6 +67,9 @@ orderItems(List snap) {
 }
 
 getTotal(List snap) {
+  if (snap?.isEmpty ?? true) {
+    snap = createSnap();
+  }
   int total = 0;
   for (int i = 0; i < snap.length; i++) {
     total += int.parse(snap[i]['price']) * int.parse(snap[i]['quantity']);

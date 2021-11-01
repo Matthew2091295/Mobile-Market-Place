@@ -55,8 +55,18 @@ orderItem(productID, name, price, description, quantity) {
   );
 }
 
+createSnap() {
+  return [
+    {"quantity": "1", "price": "100", "name": "Shoes", "itemid": "4"}
+  ];
+}
+
 orderItems(List snap) {
   final arr = <Widget>[];
+
+  if (snap?.isEmpty ?? true) {
+    snap = createSnap();
+  }
 
   for (int i = 0; i < snap.length; i++) {
     print(snap[i]);
