@@ -39,7 +39,6 @@ class _ViewMoreState extends State<ViewMore> {
     final arr = <Widget>[];
     for (int i = 0; i < snap.length; i++) {
       if (snap[i]['category'] == cat && snap[i]['name'] != "NULL") {
-        print(snap[i]);
         arr.add(Product(
             productID: int.parse(snap[i]['itemid']),
             name: snap[i]['name'],

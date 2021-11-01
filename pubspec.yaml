@@ -38,7 +38,7 @@ dependencies:
   cached_network_image: ^3.1.0
   open_file:
   path_provider:
-  syncfusion_flutter_pdf: ^18.4.47-beta
+  syncfusion_flutter_pdf: ^19.3.47-beta
   universal_html: ^1.2.4  
 
 dev_dependencies:
