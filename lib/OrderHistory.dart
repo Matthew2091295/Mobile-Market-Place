@@ -36,10 +36,18 @@ getMethod() async {
   return responseBody;
 }
 
+createSnap() {
+  return [
+    {"order_history_id": "1"}
+  ];
+}
+
 listOfOrders(BuildContext context, List snap) {
   final orderList = <Widget>[];
 
-  //orderList.add(PDFButton());
+  if (snap?.isEmpty ?? true) {
+    snap = createSnap();
+  }
 
   for (int i = 0; i < snap.length; i++) {
     orderList.add(Padding(
