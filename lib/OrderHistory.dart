@@ -6,7 +6,6 @@ import 'package:market_place/pallete.dart';
 import 'package:market_place/widgets/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:market_place/HomePage.dart';
 import 'package:market_place/Drawer.dart';
 
 import 'Globals.dart' as Globals;
