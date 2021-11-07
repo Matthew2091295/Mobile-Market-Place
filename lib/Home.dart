@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_place/ViewMorePage.dart';
 import 'package:market_place/widgets/widgets.dart';
-import 'package:tuple/tuple.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:market_place/Drawer.dart';
@@ -310,7 +309,8 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () { // view more button
+                      onPressed: () {
+                        // view more button
 
                         Navigator.push(
                             context,
